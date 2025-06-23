@@ -185,8 +185,66 @@ class FaceRecognitionSystem:
 
 ---
 
+## 🔄 Our Content Transformation Flow
+
+### Overall Process
+```mermaid
+graph TB
+    A[Existing Content] --> B{Content Type?}
+    B -->|Tutorial/Code| C[Code Transformation]
+    B -->|Link List| D[Resource Curation]
+    
+    C --> E[Identify Problem]
+    E --> F[Extract Core Solution]
+    F --> G[Create Modular Code]
+    G --> H[Add Production Features]
+    H --> I[Final Code Snippet]
+    
+    D --> J[Evaluate Quality]
+    J --> K[Add Context]
+    K --> L[Explain Value]
+    L --> M[Curated Resource]
+    
+    I --> N[Combined Output]
+    M --> N
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style N fill:#9f9,stroke:#333,stroke-width:2px
+```
+
+### Code Snippet Creation Process
+```mermaid
+graph LR
+    A[Problem Statement] --> B[Quick Solution]
+    B --> C[Production Version]
+    C --> D[Configuration]
+    D --> E[Error Handling]
+    E --> F[Logging]
+    F --> G[Testing]
+    G --> H[Documentation]
+    
+    style A fill:#ffd,stroke:#333,stroke-width:2px
+    style H fill:#dfd,stroke:#333,stroke-width:2px
+```
+
+### Resource Curation Process
+```mermaid
+graph LR
+    A[Resource Link] --> B{Quality Check}
+    B -->|Pass| C[Why It Matters]
+    B -->|Fail| X[Discard]
+    C --> D[Key Insights]
+    D --> E[Use Cases]
+    E --> F[Limitations]
+    F --> G[Final Description]
+    
+    style A fill:#fdf,stroke:#333,stroke-width:2px
+    style G fill:#dff,stroke:#333,stroke-width:2px
+```
+
 ## 📑 Table of Contents
 
+- [🔌 Model Context Protocol (MCP)](#-model-context-protocol-mcp) **🔥 NEW**
 - [📓 Interactive Notebooks](#-interactive-notebooks)
 - [🤖 Large Language Models (LLMs)](#-large-language-models-llms)
 - [🎨 Generative AI & Stable Diffusion](#-generative-ai--stable-diffusion)
@@ -215,6 +273,32 @@ class FaceRecognitionSystem:
 
 ---
 
+## 🔌 Model Context Protocol (MCP)
+
+**The Future of AI-Tool Integration** - Universal standard enabling LLMs to dynamically access tools and data sources.
+
+### Why MCP Matters
+- **Solves M×N Problem**: One protocol for all AI-tool integrations
+- **Production Ready**: Used by Claude, ChatGPT, and major AI systems
+- **Dynamic Context**: LLMs decide what tools they need in real-time
+- **Security Built-in**: Granular permissions and access control
+
+### MCP Resources
+- **[MCP Complete Guide](./MCP/model-context-protocol.md)** - From basics to advanced patterns
+- **[MCP Server Examples](./MCP/mcp-server-examples.md)** - 50+ production-ready servers
+- **[MCP Client Implementation](./MCP/mcp-client-guide.md)** - Build AI agents with MCP
+
+### Quick Example: Weather MCP Server
+```python
+# Problem: LLM needs real-time weather data
+class WeatherMCPServer:
+    async def get_weather(self, location: str):
+        # Real-time weather access for any LLM
+        return await fetch_weather_api(location)
+```
+
+---
+
 ## 🤖 Large Language Models (LLMs)
 
 ### LLM Resources & Tutorials
@@ -222,11 +306,6 @@ class FaceRecognitionSystem:
 - **[LLMs-Finetuning](./LLMs/llms-finetuning.md)** - Fine-tuning techniques and best practices
 - **[LLMs-tricks](./LLMs/llms-tricks.md)** - Tips, tricks, and optimization techniques
 - **[IQA-with-LLMs](./LLMs/iqa-with-llms.md)** - Image Quality Assessment using LLMs
-
-### Model Context Protocol (MCP)
-- **[Model Context Protocol Guide](./LLMs/model-context-protocol.md)** - Complete MCP implementation guide
-- **[MCP Server Examples](./LLMs/mcp-server-examples.md)** - Production-ready server implementations
-- **[MCP Client Guide](./LLMs/mcp-client-guide.md)** - Building MCP clients and AI agents
 
 ---
 
