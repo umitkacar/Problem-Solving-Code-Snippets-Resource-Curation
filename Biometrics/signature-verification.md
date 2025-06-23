@@ -71,19 +71,19 @@ Signature verification is a critical biometric authentication method used in ban
 ## Datasets
 
 ### Offline Signature Datasets
-**[CEDAR](http://www.cedar.buffalo.edu/NIJ/data/)** - Classic benchmark
+**[CEDAR](https://www.buffalo.edu/cubs/research/datasets.html)** - Classic benchmark
 - 🆓 Free for research
 - 55 writers
 - 24 genuine + 24 forgeries each
 - English signatures
 
-**[GPDS-960](http://www.gpds.ulpgc.es/)** - Large scale dataset
+**[GPDS-960](https://www.gpds.ulpgc.es/downloadnew/download.htm)** - Large scale dataset
 - 960 individuals
 - 24 genuine + 30 forgeries
 - Grayscale images
 - Registration required
 
-**[MCYT-75](http://atvs.ii.uam.es/)** - Bimodal database
+**[MCYT-75](https://atvs.ii.uam.es/databases.jsp)** - Bimodal database
 - 75 users
 - Online + offline signatures
 - Spanish signatures
@@ -96,18 +96,18 @@ Signature verification is a critical biometric authentication method used in ban
 - Cultural diversity
 
 ### Online Signature Datasets
-**[SVC2004](http://www.cse.ust.hk/svc2004/)** - Competition dataset
+**[SigComp](https://tc11.cvc.uab.es/datasets/SigComp2011_1)** - Signature competitions
 - Task 1: Random forgeries
 - Task 2: Skilled forgeries
 - Coordinate + pressure data
 
-**[SUSIG](http://biometrics.sabanciuniv.edu/)** - Visual subcorpus
+**[BHSig260](https://github.com/BiDAlab/BHSig260)** - Bengali and Hindi signatures
 - 94 users
 - Genuine + skilled forgeries
 - Tablet captured
 - Multiple sessions
 
-**[DeepSignDB](http://chalearnlap.cvc.uab.es/dataset/34/description/)** - Large scale online
+**[DeepSignDB](https://chalearnlap.cvc.uab.es/dataset/34/description/)** - Large scale online
 - 1526 users
 - 70,000+ signatures
 - Mobile devices

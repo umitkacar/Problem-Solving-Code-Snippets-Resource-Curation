@@ -100,7 +100,7 @@ A comprehensive collection of speech recognition, automatic speech recognition (
 ## Datasets
 
 ### English Datasets
-**[LibriSpeech](http://www.openslr.org/12/)** - 1000 hours of English speech
+**[LibriSpeech](https://www.openslr.org/12/)** - 1000 hours of English speech
 - 🆓 Free
 - Clean & other versions
 - Standard benchmark

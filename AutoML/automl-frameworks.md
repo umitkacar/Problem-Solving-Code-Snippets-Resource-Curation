@@ -49,7 +49,7 @@ predictions = predictor.predict(test_data)
 - Text & image classification
 
 ### H2O AutoML
-**[H2O AutoML](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html)** - Scalable AutoML
+**[H2O AutoML](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html)** - Scalable AutoML
 - 🆓 Open source
 - Distributed computing
 - Explainability built-in
@@ -122,7 +122,7 @@ predictions = predict_model(tuned_model, data=test)
 ```
 
 ### TPOT
-**[TPOT](http://epistasislab.github.io/tpot/)** - Tree-based Pipeline Optimization
+**[TPOT](https://epistasislab.github.io/tpot/)** - Tree-based Pipeline Optimization
 - 🆓 Open source
 - Genetic programming
 - Scikit-learn pipelines
@@ -257,7 +257,7 @@ study.optimize(objective, n_trials=100)
 - Population-based training
 
 ### Hyperopt
-**[Hyperopt](http://hyperopt.github.io/hyperopt/)** - Bayesian optimization
+**[Hyperopt](https://hyperopt.github.io/hyperopt/)** - Bayesian optimization
 - Tree-structured Parzen Estimator
 - Random search
 - Adaptive TPE
