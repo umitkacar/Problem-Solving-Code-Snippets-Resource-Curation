@@ -10,7 +10,7 @@
 
 A comprehensive collection of AI/ML resources, tools, frameworks, and learning materials curated by [Umit Kacar, PhD](https://github.com/umitkacar).
 
-**Last Updated:** 2025-06-20 | **Total Resources:** 444+ | **Categories:** 15
+**Last Updated:** 2025-06-20 | **Total Resources:** 444+ | **Categories:** 16
 
 ## 📑 Table of Contents
 
@@ -30,6 +30,7 @@ A comprehensive collection of AI/ML resources, tools, frameworks, and learning m
 - [🔧 Tools & Frameworks](#-tools--frameworks)
 - [📚 Learning Resources](#-learning-resources)
 - [💼 Interview & Career](#-interview--career)
+- [📂 Model Context Protocol (MCP)](#-model-context-protocol-mcp)
 
 ---
 
@@ -197,6 +198,12 @@ A comprehensive collection of AI/ML resources, tools, frameworks, and learning m
 
 - **[FAANG Interview Prep](./Career/faang-interview-prep.md)** - Complete FAANG AI/ML interview guide
 - **[AI Marketing Apps](./Career/ai-marketing.md)** - AI in marketing applications
+
+---
+
+## 📂 Model Context Protocol (MCP)
+
+- **[Model Context Protocol Overview](./MCP/model-context-protocol.md)** - Specification, SDKs, community servers, and example code
 
 ---
 
