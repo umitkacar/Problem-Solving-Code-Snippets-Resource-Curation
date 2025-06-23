@@ -68,6 +68,11 @@ A comprehensive collection of AI/ML resources, tools, frameworks, and learning m
 - **[LLMs-tricks](./LLMs/llms-tricks.md)** - Tips, tricks, and optimization techniques
 - **[IQA-with-LLMs](./LLMs/iqa-with-llms.md)** - Image Quality Assessment using LLMs
 
+### Model Context Protocol (MCP)
+- **[Model Context Protocol Guide](./LLMs/model-context-protocol.md)** - Complete MCP implementation guide
+- **[MCP Server Examples](./LLMs/mcp-server-examples.md)** - Production-ready server implementations
+- **[MCP Client Guide](./LLMs/mcp-client-guide.md)** - Building MCP clients and AI agents
+
 ---
 
 ## 🎨 Generative AI & Stable Diffusion
