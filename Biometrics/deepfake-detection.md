@@ -120,13 +120,13 @@ DeepFake detection is crucial for maintaining trust in digital media. As generat
 - Diverse subjects
 - Prize competition
 
-**[FaceForensics++](http://www.niessnerlab.org/projects/roessler2019faceforensicspp.html)** - Academic benchmark
+**[FaceForensics++](https://github.com/ondyari/FaceForensics)** - Academic benchmark
 - 1000 original videos
 - 5000 manipulated videos
 - Multiple methods
 - Standard splits
 
-**[Celeb-DF v2](http://www.cs.albany.edu/~lsw/celeb-deepfakeforensics.html)** - Celebrity deepfakes
+**[Celeb-DF v2](https://github.com/yuezunli/celeb-deepfakeforensics)** - Celebrity deepfakes
 - 590 original videos
 - 5639 deepfake videos
 - High quality
@@ -224,7 +224,7 @@ DeepFake detection is crucial for maintaining trust in digital media. As generat
 - Ongoing leaderboard
 - Public/private split
 
-**[FaceForensics++ Benchmark](http://kaldir.vc.in.tum.de/faceforensics_benchmark/)** - Academic
+**[DeeperForensics](https://github.com/EndlessSora/DeeperForensics-1.0)** - Large-scale dataset
 - Standard evaluation
 - Multiple tracks
 - Regular updates

@@ -10,7 +10,25 @@
 
 A comprehensive collection of AI/ML resources, tools, frameworks, and learning materials curated by [Umit Kacar, PhD](https://github.com/umitkacar).
 
-**Last Updated:** 2025-06-20 | **Total Resources:** 444+ | **Categories:** 15
+**Last Updated:** 2025-06-23 | **Total Resources:** 450+ | **Categories:** 15
+
+## 🎯 Vision & Mission
+
+**Vision:** To be the go-to resource hub for AI/ML practitioners, researchers, and developers worldwide - from beginners starting their journey to experts pushing the boundaries of artificial intelligence.
+
+**Mission:** 
+- 🌍 **Accessibility**: Organize and categorize AI/ML resources for easy discovery
+- 🔄 **Currency**: Maintain up-to-date, living documentation that evolves with the field
+- 📚 **Comprehensiveness**: Cover the full spectrum from foundational concepts to cutting-edge research
+- 🤝 **Community**: Foster an open-source community where everyone can contribute and benefit
+
+## 🌟 What Makes This Repository Special
+
+- **Curated Quality**: Every resource is carefully selected for its value and relevance
+- **Practical Focus**: Emphasis on tools and frameworks you can use today
+- **Broad Coverage**: From LLMs to Quantum ML, Mobile AI to MLOps
+- **Active Maintenance**: Regularly updated with new resources and fixed links
+- **Community Driven**: Open to contributions from the global AI community
 
 ## 📑 Table of Contents
 
@@ -92,9 +110,17 @@ A comprehensive collection of AI/ML resources, tools, frameworks, and learning m
 
 ## 🔐 Biometrics & Security
 
-### Biometric Authentication
+### Biometric Authentication Systems
+- **[Biometrics Overview](./Biometrics/README.md)** - Comprehensive comparison of all biometric modalities
+- **[Face Recognition](./Biometrics/face-recognition.md)** - Deep learning approaches, anti-spoofing, and production systems
+- **[Fingerprint Recognition](./Biometrics/fingerprint-recognition.md)** - Minutiae extraction, deep learning, and sensor technologies
+- **[Iris Recognition](./Biometrics/iris-recognition.md)** - IrisCode, deep learning methods, and liveness detection
+- **[Voice Recognition](./Biometrics/voice-recognition.md)** - Speaker recognition, x-vectors, and ECAPA-TDNN
 - **[Ear Recognition](./Biometrics/ear-recognition.md)** - Ear biometrics and segmentation
 - **[Signature Verification](./Biometrics/signature-verification.md)** - Offline/online signature verification
+- **[Gait Recognition](./Biometrics/gait-recognition.md)** - Walking pattern analysis for identification
+- **[Vein Recognition](./Biometrics/vein-recognition.md)** - NIR imaging for finger/palm vein patterns
+- **[Multimodal Biometrics](./Biometrics/multimodal-biometrics.md)** - Fusion strategies for multiple biometric traits
 
 ### Security Applications
 - **[DeepFake Detection](./Biometrics/deepfake-detection.md)** - Detecting synthetic media

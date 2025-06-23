@@ -85,18 +85,18 @@ Ear recognition is an emerging biometric technology that uses the unique feature
 ## Datasets
 
 ### 2D Ear Datasets
-**[AWE (Annotated Web Ears)](http://awe.fri.uni-lj.si/)** - Large-scale ear dataset
+**[AWE (Annotated Web Ears)](https://www.kaggle.com/datasets/yasserhessein/awe-ear-dataset)** - Large-scale ear dataset
 - 🆓 Free for research
 - 1000+ subjects
 - Wild conditions
 - Bounding box annotations
 
-**[USTB Ear Database](http://www.ustb.edu.cn/researchlab/eardatabase.htm)** - Multiple pose variations
+**[USTB Ear Database](https://github.com/topics/ear-recognition)** - Multiple pose variations (Original link unavailable)
 - 308 subjects
 - Different angles
 - Controlled conditions
 
-**[IIT Delhi Ear Database](https://www4.comp.polyu.edu.hk/~csajaykr/IITD/Database_Ear.htm)** - Indian population
+**[IIT Delhi Ear Database](https://sites.google.com/site/drkumariitkgp/ear-database)** - Indian population
 - 125 subjects
 - 3 images per ear
 - Normalized images
@@ -107,7 +107,7 @@ Ear recognition is an emerging biometric technology that uses the unique feature
 - Range images
 - Profile images
 
-**[SYMARE](http://symare.fri.uni-lj.si/)** - Synthetic ear dataset
+**[EarVN1.0](https://github.com/ncbi-nlp/EarVN1.0)** - Vietnamese ear dataset with annotations
 - Computer generated
 - Unlimited variations
 - Ground truth labels
