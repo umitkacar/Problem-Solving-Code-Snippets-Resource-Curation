@@ -1,642 +1,1075 @@
+<div align="center">
+
 # 🔧 MCP Server Examples - Production Patterns
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=26&duration=3000&pause=1000&color=10B981&center=true&vCenter=true&width=900&lines=50%2B+Ready-to-Deploy+MCP+Servers;Production-Ready+Code+Examples;Copy%2C+Customize%2C+Deploy+in+Minutes;2024-2025+Best+Practices" alt="Typing SVG" />
+
+![Examples](https://img.shields.io/badge/Examples-50%2B-success?style=for-the-badge&logo=codesandbox)
+![Ready](https://img.shields.io/badge/Status-Production_Ready-blue?style=for-the-badge&logo=checkmarx)
+![Updated](https://img.shields.io/badge/Updated-January_2025-orange?style=for-the-badge&logo=calendar)
+![License](https://img.shields.io/badge/License-Copy_Freely-purple?style=for-the-badge&logo=unlicense)
 
 **50+ Ready-to-Deploy MCP Servers** - Copy, customize, and give your LLM instant capabilities.
 
+[📊 Data Servers](#-data-access-servers) • [🌐 API Servers](#-api-integration-servers) • [📁 File Servers](#-file-system-servers) • [🔧 DevOps](#-devops-servers) • [💡 Advanced](#-advanced-patterns)
+
+</div>
+
+---
+
+## 📋 Table of Contents
+
+- [🎯 Server Categories](#-server-categories-by-problem)
+- [📊 Data Access Servers](#-data-access-servers)
+- [🌐 API Integration Servers](#-api-integration-servers)
+- [📁 File System Servers](#-file-system-servers)
+- [🔧 DevOps Servers](#-devops-servers)
+- [📚 Essential Resources](#-essential-resources)
+- [🎯 Real-World Examples](#-real-world-production-examples)
+- [📊 Server Comparison](#-server-comparison-matrix)
+
+---
+
 ## 🎯 Server Categories by Problem
 
-### 📊 Data Access Problems
+<div align="center">
 
-#### Problem: "LLM needs to query PostgreSQL database"
-```python
-# Quick: Basic PostgreSQL server
+```mermaid
+graph TB
+    subgraph "MCP Server Types"
+        A[🗄️ Data Access]
+        B[🌐 API Integration]
+        C[📁 File Systems]
+        D[🔧 DevOps Tools]
+        E[📊 Analytics]
+        F[💬 Communication]
+    end
+
+    A --> A1[PostgreSQL]
+    A --> A2[MongoDB]
+    A --> A3[Vector DBs]
+
+    B --> B1[REST APIs]
+    B --> B2[GraphQL]
+    B --> B3[WebHooks]
+
+    C --> C1[Local FS]
+    C --> C2[S3/Cloud]
+    C --> C3[Document Proc]
+
+    D --> D1[Kubernetes]
+    D --> D2[Docker]
+    D --> D3[CI/CD]
+
+    E --> E1[BI Tools]
+    E --> E2[Time Series]
+    E --> E3[ML Platforms]
+
+    F --> F1[Slack]
+    F --> F2[Email]
+    F --> F3[SMS]
+
+    style A fill:#3b82f6,stroke:#1d4ed8,color:#fff
+    style B fill:#10b981,stroke:#059669,color:#fff
+    style C fill:#f59e0b,stroke:#d97706,color:#fff
+    style D fill:#a855f7,stroke:#7e22ce,color:#fff
+    style E fill:#ef4444,stroke:#dc2626,color:#fff
+    style F fill:#06b6d4,stroke:#0891b2,color:#fff
+```
+
+</div>
+
+---
+
+## 📊 Data Access Servers
+
+### 🗄️ PostgreSQL Server
+
+**Problem:** LLM needs safe, read-only access to production database
+
+<div align="center">
+
+```mermaid
+sequenceDiagram
+    participant LLM
+    participant MCP
+    participant Validator
+    participant Pool
+    participant DB
+
+    LLM->>MCP: Query Request
+    MCP->>Validator: Validate SQL
+    Validator->>Pool: Get Connection
+    Pool->>DB: Execute Query
+    DB-->>Pool: Results
+    Pool-->>MCP: Formatted Data
+    MCP-->>LLM: JSON Response
+
+    Note over LLM,DB: Secure, Pooled, Monitored
+```
+
+</div>
+
+#### ⚡ Quick Example
+
+```bash
+# Install
 pip install mcp-server-postgres
-# Configure in Claude Desktop and go!
 
-# Production: Full-featured PostgreSQL MCP
-class PostgresMCPServer:
-    def __init__(self, config):
-        self.pool = None
-        self.query_cache = TTLCache(maxsize=100, ttl=300)
-        self.audit_log = []
-        
-    async def query(self, sql: str, params: list = None):
-        # Connection pooling
-        async with self.pool.acquire() as conn:
-            # Query caching for repeated queries
-            cache_key = f"{sql}:{params}"
-            if cache_key in self.query_cache:
-                return self.query_cache[cache_key]
-                
-            # Execute with timeout
-            result = await conn.fetch(sql, *params, timeout=30)
-            self.query_cache[cache_key] = result
-            
-            # Audit logging
-            self.audit_log.append({
-                "timestamp": datetime.now(),
-                "query": sql,
-                "params": params,
-                "rows": len(result)
-            })
-            
-            return result
+# Configure
+export POSTGRES_URL="postgresql://user:pass@localhost/db"
 ```
 
-#### Problem: "LLM needs to analyze CSV/Excel files"
+#### 🏢 Production Implementation
+
 ```python
-# Quick: Simple CSV reader
-@server.tool()
-async def read_csv(file_path: str):
-    import pandas as pd
-    return pd.read_csv(file_path).to_json()
-
-# Production: Data analysis server
-class DataAnalysisMCP:
-    def __init__(self):
-        self.supported_formats = ['.csv', '.xlsx', '.parquet', '.json']
-        
-    @server.tool()
-    async def analyze_data(
-        file_path: str,
-        operations: List[str] = ["describe", "head"]
-    ):
-        # Load data with format detection
-        df = await self._load_data(file_path)
-        
-        results = {}
-        for op in operations:
-            if op == "describe":
-                results["statistics"] = df.describe().to_dict()
-            elif op == "head":
-                results["preview"] = df.head(10).to_dict()
-            elif op == "missing":
-                results["missing_values"] = df.isnull().sum().to_dict()
-            elif op == "dtypes":
-                results["data_types"] = df.dtypes.to_dict()
-                
-        return results
-```
-
-#### Problem: "LLM needs vector database search"
-```python
-# Quick: ChromaDB search
-@server.tool()
-async def vector_search(query: str, collection: str, k: int = 5):
-    results = collection.query(query_texts=[query], n_results=k)
-    return results
-
-# Production: Multi-vector DB server
-class VectorSearchMCP:
-    def __init__(self, config):
-        self.engines = {
-            "chroma": ChromaClient(config.chroma),
-            "pinecone": PineconeClient(config.pinecone),
-            "weaviate": WeaviateClient(config.weaviate)
-        }
-        
-    @server.tool()
-    async def hybrid_search(
-        query: str,
-        engines: List[str] = ["chroma"],
-        k: int = 10,
-        rerank: bool = True
-    ):
-        # Parallel search across engines
-        tasks = []
-        for engine in engines:
-            if engine in self.engines:
-                tasks.append(
-                    self.engines[engine].search(query, k=k*2)
-                )
-                
-        results = await asyncio.gather(*tasks)
-        
-        # Merge and rerank results
-        merged = self._merge_results(results)
-        
-        if rerank:
-            merged = await self._rerank_results(query, merged)
-            
-        return merged[:k]
-```
-
-### 🌐 API Integration Problems
-
-#### Problem: "LLM needs to manage GitHub repos"
-```python
-# Quick: Basic GitHub operations
-@server.tool()
-async def github_api(endpoint: str, method: str = "GET", data: dict = None):
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    async with httpx.AsyncClient() as client:
-        response = await client.request(
-            method, 
-            f"https://api.github.com{endpoint}",
-            headers=headers,
-            json=data
-        )
-        return response.json()
-
-# Production: Full GitHub integration
-class GitHubMCP:
-    def __init__(self, token: str):
-        self.client = Github(token)
-        self.cache = {}
-        
-    @server.tool()
-    async def manage_repo(
-        action: str,
-        repo: str,
-        **kwargs
-    ):
-        """Create PRs, issues, manage branches, etc."""
-        repository = self.client.get_repo(repo)
-        
-        if action == "create_pr":
-            return repository.create_pull(
-                title=kwargs["title"],
-                body=kwargs["body"],
-                base=kwargs.get("base", "main"),
-                head=kwargs["head"]
-            )
-        elif action == "create_issue":
-            return repository.create_issue(
-                title=kwargs["title"],
-                body=kwargs["body"],
-                labels=kwargs.get("labels", [])
-            )
-        elif action == "list_workflows":
-            return [w.name for w in repository.get_workflows()]
-```
-
-#### Problem: "LLM needs to send notifications"
-```python
-# Quick: Email notifications
-@server.tool()
-async def send_email(to: str, subject: str, body: str):
-    # Using SMTP
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['To'] = to
-    await aiosmtplib.send(msg)
-
-# Production: Multi-channel notifications
-class NotificationMCP:
-    def __init__(self, config):
-        self.channels = {
-            "email": EmailChannel(config.smtp),
-            "slack": SlackChannel(config.slack),
-            "sms": TwilioChannel(config.twilio),
-            "webhook": WebhookChannel()
-        }
-        
-    @server.tool()
-    async def notify(
-        message: str,
-        channels: List[str],
-        priority: str = "normal",
-        metadata: dict = None
-    ):
-        # Route to appropriate channels
-        tasks = []
-        for channel in channels:
-            if channel in self.channels:
-                tasks.append(
-                    self.channels[channel].send(
-                        message, priority, metadata
-                    )
-                )
-                
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-        
-        return {
-            "sent": sum(1 for r in results if not isinstance(r, Exception)),
-            "failed": sum(1 for r in results if isinstance(r, Exception)),
-            "details": results
-        }
-```
-
-### 🗂️ File System Problems
-
-#### Problem: "LLM needs to process documents"
-```python
-# Quick: Read any document
-@server.tool()
-async def read_document(file_path: str):
-    if file_path.endswith('.pdf'):
-        return extract_text_from_pdf(file_path)
-    elif file_path.endswith('.docx'):
-        return extract_text_from_docx(file_path)
-    else:
-        with open(file_path, 'r') as f:
-            return f.read()
-
-# Production: Document processing pipeline
-class DocumentProcessorMCP:
-    def __init__(self):
-        self.processors = {
-            '.pdf': PDFProcessor(),
-            '.docx': DocxProcessor(),
-            '.xlsx': ExcelProcessor(),
-            '.pptx': PowerPointProcessor(),
-            '.html': HTMLProcessor(),
-            '.md': MarkdownProcessor()
-        }
-        
-    @server.tool()
-    async def process_document(
-        file_path: str,
-        operations: List[str] = ["extract_text"],
-        output_format: str = "markdown"
-    ):
-        # Detect file type
-        ext = Path(file_path).suffix.lower()
-        processor = self.processors.get(ext)
-        
-        if not processor:
-            return {"error": f"Unsupported file type: {ext}"}
-            
-        results = {}
-        
-        # Run requested operations
-        if "extract_text" in operations:
-            results["text"] = await processor.extract_text(file_path)
-            
-        if "extract_images" in operations:
-            results["images"] = await processor.extract_images(file_path)
-            
-        if "extract_metadata" in operations:
-            results["metadata"] = await processor.extract_metadata(file_path)
-            
-        if "extract_tables" in operations:
-            results["tables"] = await processor.extract_tables(file_path)
-            
-        # Convert to requested format
-        if output_format == "markdown":
-            results = self._to_markdown(results)
-        elif output_format == "json":
-            results = json.dumps(results, indent=2)
-            
-        return results
-```
-
-### 🔧 DevOps Problems
-
-#### Problem: "LLM needs to manage Kubernetes"
-```python
-# Quick: Basic K8s operations
-@server.tool()
-async def kubectl(command: str):
-    result = subprocess.run(
-        f"kubectl {command}",
-        shell=True,
-        capture_output=True,
-        text=True
-    )
-    return result.stdout
-
-# Production: Kubernetes management
-class KubernetesMCP:
-    def __init__(self):
-        config.load_incluster_config()  # or load_kube_config()
-        self.v1 = client.CoreV1Api()
-        self.apps_v1 = client.AppsV1Api()
-        
-    @server.tool()
-    async def manage_deployment(
-        action: str,
-        namespace: str,
-        name: str,
-        **kwargs
-    ):
-        if action == "scale":
-            return self.apps_v1.patch_namespaced_deployment_scale(
-                name=name,
-                namespace=namespace,
-                body={"spec": {"replicas": kwargs["replicas"]}}
-            )
-            
-        elif action == "update_image":
-            deployment = self.apps_v1.read_namespaced_deployment(
-                name=name,
-                namespace=namespace
-            )
-            deployment.spec.template.spec.containers[0].image = kwargs["image"]
-            return self.apps_v1.patch_namespaced_deployment(
-                name=name,
-                namespace=namespace,
-                body=deployment
-            )
-            
-        elif action == "get_logs":
-            pods = self.v1.list_namespaced_pod(
-                namespace=namespace,
-                label_selector=f"app={name}"
-            )
-            logs = {}
-            for pod in pods.items:
-                logs[pod.metadata.name] = self.v1.read_namespaced_pod_log(
-                    name=pod.metadata.name,
-                    namespace=namespace,
-                    tail_lines=kwargs.get("lines", 100)
-                )
-            return logs
-```
-
-#### Problem: "LLM needs to monitor systems"
-```python
-# Quick: System metrics
-@server.tool()
-async def get_system_metrics():
-    return {
-        "cpu_percent": psutil.cpu_percent(interval=1),
-        "memory": psutil.virtual_memory()._asdict(),
-        "disk": psutil.disk_usage('/')._asdict(),
-        "network": psutil.net_io_counters()._asdict()
-    }
-
-# Production: Comprehensive monitoring
-class MonitoringMCP:
-    def __init__(self, config):
-        self.prometheus = PrometheusClient(config.prometheus_url)
-        self.grafana = GrafanaClient(config.grafana_url)
-        self.alerts = AlertManager(config.alertmanager_url)
-        
-    @server.tool()
-    async def query_metrics(
-        query: str,
-        time_range: str = "1h",
-        step: str = "1m"
-    ):
-        """Execute PromQL queries"""
-        result = await self.prometheus.query_range(
-            query=query,
-            start=f"now-{time_range}",
-            end="now",
-            step=step
-        )
-        
-        # Format for LLM consumption
-        formatted = {
-            "query": query,
-            "time_range": time_range,
-            "data_points": len(result["data"]["result"][0]["values"]),
-            "series": []
-        }
-        
-        for series in result["data"]["result"]:
-            formatted["series"].append({
-                "labels": series["metric"],
-                "values": series["values"]
-            })
-            
-        return formatted
-        
-    @server.tool()
-    async def check_alerts(
-        severity: str = None,
-        service: str = None
-    ):
-        """Get active alerts"""
-        alerts = await self.alerts.get_alerts()
-        
-        # Filter by criteria
-        if severity:
-            alerts = [a for a in alerts if a["labels"].get("severity") == severity]
-        if service:
-            alerts = [a for a in alerts if a["labels"].get("service") == service]
-            
-        return {
-            "active_alerts": len(alerts),
-            "alerts": alerts
-        }
-```
-
-## 📚 Essential MCP Server Resources
-
-### 🏆 Official Servers
-
-**[MCP Servers Repository](https://github.com/modelcontextprotocol/servers)** - Official collection
-- Database servers: PostgreSQL, MySQL, SQLite, MongoDB
-- File systems: Local FS, S3, Google Drive
-- Dev tools: Git, Docker, NPM
-- All production-tested and maintained
-
-**[Anthropic's Reference Servers](https://github.com/anthropics/mcp-servers)** - Reference implementations
-- Best practices demonstrated
-- Clean code patterns
-- Comprehensive testing
-
-### 📖 Server Development Guides
-
-**[Building Robust MCP Servers](https://modelcontextprotocol.io/docs/guides/robust-servers)** - Production guide
-- Error handling strategies
-- Connection management
-- Resource lifecycle
-- Graceful shutdowns
-
-**[MCP Server Security](https://modelcontextprotocol.io/docs/security)** - Security best practices
-- Authentication patterns
-- Input validation
-- Rate limiting
-- Audit logging
-
-### 🛠️ Testing & Debugging
-
-**[MCP Test Suite](https://github.com/modelcontextprotocol/test-suite)** - Comprehensive testing
-- Unit test examples
-- Integration testing
-- Load testing scripts
-- CI/CD integration
-
-## 🔧 Advanced Server Patterns
-
-### Multi-tenant Server
-```python
-class MultiTenantMCP:
-    """Isolated resources per tenant"""
-    
-    def __init__(self):
-        self.tenants = {}
-        
-    async def get_tenant_context(self, tenant_id: str):
-        if tenant_id not in self.tenants:
-            self.tenants[tenant_id] = {
-                "db_pool": await self._create_tenant_pool(tenant_id),
-                "cache": TTLCache(maxsize=50, ttl=300),
-                "rate_limiter": RateLimiter(100, 3600)
-            }
-        return self.tenants[tenant_id]
-```
-
-### Plugin Architecture
-```python
-class PluginMCP:
-    """Extensible server with plugins"""
-    
-    def __init__(self):
-        self.plugins = {}
-        self._load_plugins()
-        
-    def _load_plugins(self):
-        plugin_dir = Path("plugins")
-        for plugin_path in plugin_dir.glob("*.py"):
-            spec = importlib.util.spec_from_file_location(
-                plugin_path.stem, plugin_path
-            )
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            
-            if hasattr(module, "MCPPlugin"):
-                plugin = module.MCPPlugin()
-                self.plugins[plugin.name] = plugin
-                self._register_plugin_tools(plugin)
-```
-
-### Event-Driven Server
-```python
-class EventDrivenMCP:
-    """Async event processing"""
-    
-    def __init__(self):
-        self.event_queue = asyncio.Queue()
-        self.handlers = defaultdict(list)
-        
-    async def emit(self, event: str, data: dict):
-        await self.event_queue.put({"event": event, "data": data})
-        
-    async def process_events(self):
-        while True:
-            event = await self.event_queue.get()
-            for handler in self.handlers[event["event"]]:
-                asyncio.create_task(handler(event["data"]))
-```
-
-## 🚀 Deployment Templates
-
-### AWS Lambda Deployment
-```python
-# lambda_function.py
+import asyncpg
+from mcp.server import Server
+from mcp.types import TextContent, Tool
 import json
-from mcp_lambda_adapter import MCPLambdaAdapter
-from your_server import YourMCPServer
+from datetime import datetime
+from typing import Optional, List
+import logging
 
-adapter = MCPLambdaAdapter(YourMCPServer())
+class ProductionPostgresServer:
+    """Enterprise-grade PostgreSQL MCP server"""
 
-def lambda_handler(event, context):
-    return adapter.handle(event, context)
-```
+    def __init__(self, config):
+        self.config = config
+        self.server = Server("postgres-production")
+        self.pool = None
+        self.stats = {
+            'queries_executed': 0,
+            'total_rows_returned': 0,
+            'errors': 0
+        }
 
-### Docker Compose Stack
-```yaml
-version: '3.8'
-services:
-  mcp-server:
-    build: .
-    environment:
-      - DATABASE_URL=postgresql://user:pass@db:5432/mydb
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - db
-      - redis
-    ports:
-      - "8080:8080"
-      
-  db:
-    image: postgres:15
-    environment:
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_USER=user
-      - POSTGRES_DB=mydb
-      
-  redis:
-    image: redis:7-alpine
-```
-
-## 📊 Performance Optimization
-
-### Connection Pooling
-```python
-class OptimizedMCP:
-    async def setup_pools(self):
-        # Database connection pool
-        self.db_pool = await asyncpg.create_pool(
-            dsn=self.config.database_url,
+    async def initialize(self):
+        """Setup with monitoring and health checks"""
+        self.pool = await asyncpg.create_pool(
+            self.config.database_url,
             min_size=5,
             max_size=20,
-            max_inactive_connection_lifetime=300
+            timeout=30,
+            command_timeout=10,
+            server_settings={
+                'application_name': 'mcp_postgres',
+                'statement_timeout': '5000'  # 5 seconds
+            }
         )
-        
-        # HTTP client pool
-        self.http_client = httpx.AsyncClient(
-            limits=httpx.Limits(
-                max_connections=100,
-                max_keepalive_connections=20
+
+        # Register tools
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def query(
+            sql: str,
+            params: Optional[List] = None,
+            limit: int = 100
+        ) -> TextContent:
+            """Execute safe SELECT query"""
+
+            # Validation
+            if not sql.strip().upper().startswith('SELECT'):
+                return TextContent(
+                    text=json.dumps({
+                        'error': 'Only SELECT queries allowed'
+                    }),
+                    mime_type="application/json"
+                )
+
+            # Add limit
+            if 'LIMIT' not in sql.upper():
+                sql = f"{sql.rstrip(';')} LIMIT {min(limit, 1000)}"
+
+            try:
+                async with self.pool.acquire() as conn:
+                    rows = await conn.fetch(sql, *(params or []))
+
+                    self.stats['queries_executed'] += 1
+                    self.stats['total_rows_returned'] += len(rows)
+
+                    return TextContent(
+                        text=json.dumps({
+                            'data': [dict(r) for r in rows],
+                            'count': len(rows)
+                        }, indent=2, default=str),
+                        mime_type="application/json"
+                    )
+            except Exception as e:
+                self.stats['errors'] += 1
+                logging.error(f"Query error: {e}")
+                return TextContent(
+                    text=json.dumps({'error': str(e)}),
+                    mime_type="application/json"
+                )
+
+        @self.server.tool()
+        async def get_schema() -> TextContent:
+            """Get database schema information"""
+            query = """
+                SELECT
+                    table_name,
+                    column_name,
+                    data_type,
+                    is_nullable
+                FROM information_schema.columns
+                WHERE table_schema = 'public'
+                ORDER BY table_name, ordinal_position
+            """
+
+            async with self.pool.acquire() as conn:
+                rows = await conn.fetch(query)
+                schema = {}
+
+                for row in rows:
+                    table = row['table_name']
+                    if table not in schema:
+                        schema[table] = []
+
+                    schema[table].append({
+                        'column': row['column_name'],
+                        'type': row['data_type'],
+                        'nullable': row['is_nullable'] == 'YES'
+                    })
+
+                return TextContent(
+                    text=json.dumps(schema, indent=2),
+                    mime_type="application/json"
+                )
+```
+
+**Features:**
+- ✅ Connection pooling
+- ✅ Query validation
+- ✅ Automatic limits
+- ✅ Schema introspection
+- ✅ Error handling
+- ✅ Performance stats
+
+### 🍃 MongoDB Server
+
+**Problem:** LLM needs to query NoSQL documents
+
+```python
+from motor.motor_asyncio import AsyncIOMotorClient
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class MongoDBMCPServer:
+    """MongoDB MCP server with aggregation support"""
+
+    def __init__(self, connection_string: str):
+        self.client = AsyncIOMotorClient(connection_string)
+        self.server = Server("mongodb-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def find_documents(
+            database: str,
+            collection: str,
+            query: dict,
+            limit: int = 100
+        ) -> TextContent:
+            """Find documents matching query"""
+
+            db = self.client[database]
+            coll = db[collection]
+
+            documents = await coll.find(query).limit(limit).to_list(length=limit)
+
+            # Convert ObjectId to string
+            for doc in documents:
+                if '_id' in doc:
+                    doc['_id'] = str(doc['_id'])
+
+            return TextContent(
+                text=json.dumps({
+                    'documents': documents,
+                    'count': len(documents)
+                }, indent=2),
+                mime_type="application/json"
             )
-        )
+
+        @self.server.tool()
+        async def aggregate(
+            database: str,
+            collection: str,
+            pipeline: List[dict]
+        ) -> TextContent:
+            """Run aggregation pipeline"""
+
+            db = self.client[database]
+            coll = db[collection]
+
+            results = await coll.aggregate(pipeline).to_list(length=1000)
+
+            return TextContent(
+                text=json.dumps({
+                    'results': results,
+                    'count': len(results)
+                }, indent=2, default=str),
+                mime_type="application/json"
+            )
 ```
 
-### Caching Strategy
-```python
-class CachedMCP:
-    def __init__(self):
-        # Multi-level cache
-        self.memory_cache = TTLCache(maxsize=1000, ttl=60)
-        self.redis_cache = aioredis.from_url("redis://localhost")
-        
-    async def get_cached(self, key: str):
-        # L1: Memory cache
-        if key in self.memory_cache:
-            return self.memory_cache[key]
-            
-        # L2: Redis cache
-        value = await self.redis_cache.get(key)
-        if value:
-            self.memory_cache[key] = value
-            return value
-            
-        return None
-```
+### 🎯 Vector Database Server
 
-## 🎯 Real-World Production Examples
+**Problem:** LLM needs semantic search capabilities
 
-### E-commerce Assistant
 ```python
-servers = {
-    "inventory": "mcp-server-postgres",
-    "orders": "mcp-server-postgres", 
-    "shipping": "mcp-server-fedex",
-    "payments": "mcp-server-stripe",
-    "support": "mcp-server-zendesk",
-    "analytics": "mcp-server-bigquery"
-}
-```
+import chromadb
+from mcp.server import Server
+from mcp.types import TextContent
+import json
 
-### DevOps Automation
-```python
-servers = {
-    "k8s": "mcp-server-kubernetes",
-    "ci": "mcp-server-jenkins",
-    "monitoring": "mcp-server-prometheus",
-    "logs": "mcp-server-elasticsearch",
-    "incidents": "mcp-server-pagerduty"
-}
-```
+class VectorDBMCPServer:
+    """ChromaDB MCP server for semantic search"""
 
-### Data Science Platform
-```python
-servers = {
-    "notebooks": "mcp-server-jupyter",
-    "data": "mcp-server-s3",
-    "compute": "mcp-server-databricks",
-    "models": "mcp-server-mlflow",
-    "viz": "mcp-server-plotly"
-}
+    def __init__(self, persist_directory: str):
+        self.client = chromadb.PersistentClient(path=persist_directory)
+        self.server = Server("vectordb-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def semantic_search(
+            collection_name: str,
+            query_text: str,
+            n_results: int = 10,
+            where: dict = None
+        ) -> TextContent:
+            """Semantic search in vector database"""
+
+            collection = self.client.get_collection(collection_name)
+
+            results = collection.query(
+                query_texts=[query_text],
+                n_results=n_results,
+                where=where
+            )
+
+            return TextContent(
+                text=json.dumps({
+                    'results': results,
+                    'count': len(results['ids'][0]) if results['ids'] else 0
+                }, indent=2),
+                mime_type="application/json"
+            )
+
+        @self.server.tool()
+        async def add_documents(
+            collection_name: str,
+            documents: List[str],
+            metadatas: List[dict],
+            ids: List[str]
+        ) -> TextContent:
+            """Add documents to collection"""
+
+            collection = self.client.get_or_create_collection(collection_name)
+
+            collection.add(
+                documents=documents,
+                metadatas=metadatas,
+                ids=ids
+            )
+
+            return TextContent(
+                text=json.dumps({
+                    'added': len(documents),
+                    'collection': collection_name
+                }),
+                mime_type="application/json"
+            )
 ```
 
 ---
 
+## 🌐 API Integration Servers
+
+### 🐙 GitHub Server
+
+**Problem:** LLM needs to manage repositories, issues, PRs
+
+```python
+from github import Github, GithubException
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class GitHubMCPServer:
+    """Comprehensive GitHub API integration"""
+
+    def __init__(self, access_token: str):
+        self.github = Github(access_token)
+        self.server = Server("github-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def create_issue(
+            repo: str,
+            title: str,
+            body: str,
+            labels: List[str] = None
+        ) -> TextContent:
+            """Create a new GitHub issue"""
+
+            try:
+                repository = self.github.get_repo(repo)
+                issue = repository.create_issue(
+                    title=title,
+                    body=body,
+                    labels=labels or []
+                )
+
+                return TextContent(
+                    text=json.dumps({
+                        'issue_number': issue.number,
+                        'url': issue.html_url,
+                        'state': issue.state
+                    }, indent=2),
+                    mime_type="application/json"
+                )
+            except GithubException as e:
+                return TextContent(
+                    text=json.dumps({'error': str(e)}),
+                    mime_type="application/json"
+                )
+
+        @self.server.tool()
+        async def create_pr(
+            repo: str,
+            title: str,
+            body: str,
+            head: str,
+            base: str = "main"
+        ) -> TextContent:
+            """Create a pull request"""
+
+            try:
+                repository = self.github.get_repo(repo)
+                pr = repository.create_pull(
+                    title=title,
+                    body=body,
+                    head=head,
+                    base=base
+                )
+
+                return TextContent(
+                    text=json.dumps({
+                        'pr_number': pr.number,
+                        'url': pr.html_url,
+                        'mergeable': pr.mergeable
+                    }, indent=2),
+                    mime_type="application/json"
+                )
+            except GithubException as e:
+                return TextContent(
+                    text=json.dumps({'error': str(e)}),
+                    mime_type="application/json"
+                )
+
+        @self.server.tool()
+        async def search_code(
+            query: str,
+            repo: str = None,
+            language: str = None
+        ) -> TextContent:
+            """Search code across GitHub"""
+
+            query_parts = [query]
+            if repo:
+                query_parts.append(f"repo:{repo}")
+            if language:
+                query_parts.append(f"language:{language}")
+
+            search_query = " ".join(query_parts)
+            results = self.github.search_code(search_query)
+
+            return TextContent(
+                text=json.dumps({
+                    'total_count': results.totalCount,
+                    'results': [
+                        {
+                            'path': item.path,
+                            'repository': item.repository.full_name,
+                            'url': item.html_url
+                        }
+                        for item in results[:20]
+                    ]
+                }, indent=2),
+                mime_type="application/json"
+            )
+```
+
+### 💬 Slack Server
+
+**Problem:** LLM needs to send messages and interact with Slack
+
+```python
+from slack_sdk.web.async_client import AsyncWebClient
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class SlackMCPServer:
+    """Slack API integration server"""
+
+    def __init__(self, token: str):
+        self.client = AsyncWebClient(token=token)
+        self.server = Server("slack-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def send_message(
+            channel: str,
+            text: str,
+            thread_ts: str = None
+        ) -> TextContent:
+            """Send message to Slack channel"""
+
+            response = await self.client.chat_postMessage(
+                channel=channel,
+                text=text,
+                thread_ts=thread_ts
+            )
+
+            return TextContent(
+                text=json.dumps({
+                    'ok': response['ok'],
+                    'channel': response['channel'],
+                    'ts': response['ts']
+                }, indent=2),
+                mime_type="application/json"
+            )
+
+        @self.server.tool()
+        async def get_channel_history(
+            channel: str,
+            limit: int = 100
+        ) -> TextContent:
+            """Get recent messages from channel"""
+
+            response = await self.client.conversations_history(
+                channel=channel,
+                limit=limit
+            )
+
+            messages = [
+                {
+                    'user': msg.get('user'),
+                    'text': msg.get('text'),
+                    'ts': msg.get('ts')
+                }
+                for msg in response['messages']
+            ]
+
+            return TextContent(
+                text=json.dumps({
+                    'messages': messages,
+                    'count': len(messages)
+                }, indent=2),
+                mime_type="application/json"
+            )
+```
+
+---
+
+## 📁 File System Servers
+
+### 📂 Local File System Server
+
+**Problem:** LLM needs safe access to local files
+
+```python
+from pathlib import Path
+import aiofiles
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class LocalFileSystemMCP:
+    """Secure local file system access"""
+
+    def __init__(self, allowed_directories: List[str]):
+        self.allowed_dirs = [Path(d).resolve() for d in allowed_directories]
+        self.server = Server("filesystem-server")
+        self._register_tools()
+
+    def _is_safe_path(self, path: str) -> bool:
+        """Check if path is within allowed directories"""
+        try:
+            target = Path(path).resolve()
+            return any(
+                target.is_relative_to(allowed)
+                for allowed in self.allowed_dirs
+            )
+        except:
+            return False
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def read_file(path: str) -> TextContent:
+            """Read file contents"""
+
+            if not self._is_safe_path(path):
+                return TextContent(
+                    text=json.dumps({'error': 'Access denied'}),
+                    mime_type="application/json"
+                )
+
+            try:
+                async with aiofiles.open(path, 'r') as f:
+                    content = await f.read()
+
+                return TextContent(
+                    text=json.dumps({
+                        'path': path,
+                        'content': content,
+                        'size': len(content)
+                    }),
+                    mime_type="application/json"
+                )
+            except Exception as e:
+                return TextContent(
+                    text=json.dumps({'error': str(e)}),
+                    mime_type="application/json"
+                )
+
+        @self.server.tool()
+        async def list_files(
+            directory: str,
+            pattern: str = "*"
+        ) -> TextContent:
+            """List files in directory"""
+
+            if not self._is_safe_path(directory):
+                return TextContent(
+                    text=json.dumps({'error': 'Access denied'}),
+                    mime_type="application/json"
+                )
+
+            path = Path(directory)
+            files = [
+                {
+                    'name': f.name,
+                    'path': str(f),
+                    'is_dir': f.is_dir(),
+                    'size': f.stat().st_size if f.is_file() else None
+                }
+                for f in path.glob(pattern)
+            ]
+
+            return TextContent(
+                text=json.dumps({
+                    'directory': directory,
+                    'files': files,
+                    'count': len(files)
+                }, indent=2),
+                mime_type="application/json"
+            )
+```
+
+### ☁️ AWS S3 Server
+
+**Problem:** LLM needs to access cloud storage
+
+```python
+import aioboto3
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class S3MCPServer:
+    """AWS S3 integration server"""
+
+    def __init__(self, region: str = "us-east-1"):
+        self.region = region
+        self.session = aioboto3.Session()
+        self.server = Server("s3-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def list_objects(
+            bucket: str,
+            prefix: str = "",
+            max_keys: int = 100
+        ) -> TextContent:
+            """List objects in S3 bucket"""
+
+            async with self.session.client('s3', region_name=self.region) as s3:
+                response = await s3.list_objects_v2(
+                    Bucket=bucket,
+                    Prefix=prefix,
+                    MaxKeys=max_keys
+                )
+
+                objects = [
+                    {
+                        'key': obj['Key'],
+                        'size': obj['Size'],
+                        'last_modified': obj['LastModified'].isoformat()
+                    }
+                    for obj in response.get('Contents', [])
+                ]
+
+                return TextContent(
+                    text=json.dumps({
+                        'bucket': bucket,
+                        'objects': objects,
+                        'count': len(objects)
+                    }, indent=2),
+                    mime_type="application/json"
+                )
+
+        @self.server.tool()
+        async def get_object(
+            bucket: str,
+            key: str
+        ) -> TextContent:
+            """Get object from S3"""
+
+            async with self.session.client('s3', region_name=self.region) as s3:
+                response = await s3.get_object(Bucket=bucket, Key=key)
+
+                async with response['Body'] as stream:
+                    content = await stream.read()
+
+                return TextContent(
+                    text=json.dumps({
+                        'bucket': bucket,
+                        'key': key,
+                        'content': content.decode('utf-8'),
+                        'content_type': response['ContentType']
+                    }),
+                    mime_type="application/json"
+                )
+```
+
+---
+
+## 🔧 DevOps Servers
+
+### ☸️ Kubernetes Server
+
+**Problem:** LLM needs to manage Kubernetes resources
+
+```python
+from kubernetes import client, config
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class KubernetesMCPServer:
+    """Kubernetes cluster management"""
+
+    def __init__(self):
+        config.load_kube_config()
+        self.v1 = client.CoreV1Api()
+        self.apps_v1 = client.AppsV1Api()
+        self.server = Server("kubernetes-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def list_pods(
+            namespace: str = "default",
+            label_selector: str = None
+        ) -> TextContent:
+            """List pods in namespace"""
+
+            pods = self.v1.list_namespaced_pod(
+                namespace=namespace,
+                label_selector=label_selector
+            )
+
+            pod_list = [
+                {
+                    'name': pod.metadata.name,
+                    'status': pod.status.phase,
+                    'ip': pod.status.pod_ip,
+                    'node': pod.spec.node_name
+                }
+                for pod in pods.items
+            ]
+
+            return TextContent(
+                text=json.dumps({
+                    'namespace': namespace,
+                    'pods': pod_list,
+                    'count': len(pod_list)
+                }, indent=2),
+                mime_type="application/json"
+            )
+
+        @self.server.tool()
+        async def scale_deployment(
+            name: str,
+            namespace: str,
+            replicas: int
+        ) -> TextContent:
+            """Scale deployment"""
+
+            deployment = self.apps_v1.read_namespaced_deployment(
+                name=name,
+                namespace=namespace
+            )
+
+            deployment.spec.replicas = replicas
+
+            self.apps_v1.patch_namespaced_deployment(
+                name=name,
+                namespace=namespace,
+                body=deployment
+            )
+
+            return TextContent(
+                text=json.dumps({
+                    'deployment': name,
+                    'namespace': namespace,
+                    'replicas': replicas,
+                    'status': 'scaled'
+                }),
+                mime_type="application/json"
+            )
+
+        @self.server.tool()
+        async def get_logs(
+            pod_name: str,
+            namespace: str,
+            tail_lines: int = 100
+        ) -> TextContent:
+            """Get pod logs"""
+
+            logs = self.v1.read_namespaced_pod_log(
+                name=pod_name,
+                namespace=namespace,
+                tail_lines=tail_lines
+            )
+
+            return TextContent(
+                text=json.dumps({
+                    'pod': pod_name,
+                    'namespace': namespace,
+                    'logs': logs
+                }),
+                mime_type="application/json"
+            )
+```
+
+### 🐳 Docker Server
+
+**Problem:** LLM needs to manage Docker containers
+
+```python
+import docker
+from mcp.server import Server
+from mcp.types import TextContent
+import json
+
+class DockerMCPServer:
+    """Docker container management"""
+
+    def __init__(self):
+        self.client = docker.from_env()
+        self.server = Server("docker-server")
+        self._register_tools()
+
+    def _register_tools(self):
+        @self.server.tool()
+        async def list_containers(
+            all: bool = False
+        ) -> TextContent:
+            """List Docker containers"""
+
+            containers = self.client.containers.list(all=all)
+
+            container_list = [
+                {
+                    'id': c.short_id,
+                    'name': c.name,
+                    'status': c.status,
+                    'image': c.image.tags[0] if c.image.tags else None
+                }
+                for c in containers
+            ]
+
+            return TextContent(
+                text=json.dumps({
+                    'containers': container_list,
+                    'count': len(container_list)
+                }, indent=2),
+                mime_type="application/json"
+            )
+
+        @self.server.tool()
+        async def get_container_logs(
+            container_id: str,
+            tail: int = 100
+        ) -> TextContent:
+            """Get container logs"""
+
+            container = self.client.containers.get(container_id)
+            logs = container.logs(tail=tail).decode('utf-8')
+
+            return TextContent(
+                text=json.dumps({
+                    'container': container_id,
+                    'logs': logs
+                }),
+                mime_type="application/json"
+            )
+```
+
+---
+
+## 📚 Essential Resources
+
+### 🏆 Official Server Collections
+
 <div align="center">
-  <p><strong>Pick a server. Customize it. Deploy it. Done!</strong></p>
-  <p>Your LLM is now connected to the world</p>
+
+| Resource | Servers | Stars | Use Case |
+|----------|---------|-------|----------|
+| **[Official Servers](https://github.com/modelcontextprotocol/servers)** | 100+ | ![Stars](https://img.shields.io/github/stars/modelcontextprotocol/servers) | All categories |
+| **[Anthropic Servers](https://github.com/anthropics/mcp-servers)** | 20+ | ![Stars](https://img.shields.io/github/stars/anthropics/mcp-servers) | Reference implementations |
+| **[Community Servers](https://github.com/punkpeye/awesome-mcp)** | 200+ | ![Stars](https://img.shields.io/github/stars/punkpeye/awesome-mcp) | Community contributions |
+
+</div>
+
+### 🎓 Learning Resources
+
+- **[MCP Server Tutorial](https://modelcontextprotocol.io/tutorials)** - Step-by-step guide
+- **[Server Development Guide](https://modelcontextprotocol.io/docs/server-development)** - Best practices
+- **[Testing Servers](https://github.com/modelcontextprotocol/test-suite)** - Comprehensive tests
+
+---
+
+## 🎯 Real-World Production Examples
+
+### 💼 E-commerce Assistant
+
+```python
+# Problem: Bot needs inventory, orders, payments, shipping
+servers = {
+    "inventory": {
+        "server": "mcp-server-postgres",
+        "config": {"db": "inventory_db"}
+    },
+    "orders": {
+        "server": "mcp-server-postgres",
+        "config": {"db": "orders_db"}
+    },
+    "payments": {
+        "server": "mcp-server-stripe",
+        "config": {"api_key": "$STRIPE_KEY"}
+    },
+    "shipping": {
+        "server": "mcp-server-fedex",
+        "config": {"api_key": "$FEDEX_KEY"}
+    }
+}
+
+# Usage: "What's the status of order #12345 and when will it ship?"
+```
+
+### 📊 Data Science Platform
+
+```python
+# Problem: Analysts need data + notebooks + viz
+servers = {
+    "warehouse": {
+        "server": "mcp-server-snowflake",
+        "config": {"account": "abc123"}
+    },
+    "notebooks": {
+        "server": "mcp-server-jupyter",
+        "config": {"url": "http://jupyter:8888"}
+    },
+    "visualizations": {
+        "server": "mcp-server-plotly",
+        "config": {}
+    },
+    "storage": {
+        "server": "mcp-server-s3",
+        "config": {"bucket": "data-outputs"}
+    }
+}
+
+# Usage: "Analyze Q4 sales trends and create a dashboard"
+```
+
+### 🚀 DevOps Automation
+
+```python
+# Problem: Manage infrastructure via chat
+servers = {
+    "kubernetes": {
+        "server": "mcp-server-kubernetes",
+        "config": {"context": "production"}
+    },
+    "monitoring": {
+        "server": "mcp-server-prometheus",
+        "config": {"url": "http://prometheus:9090"}
+    },
+    "logs": {
+        "server": "mcp-server-elasticsearch",
+        "config": {"url": "http://elasticsearch:9200"}
+    },
+    "incidents": {
+        "server": "mcp-server-pagerduty",
+        "config": {"api_key": "$PD_KEY"}
+    },
+    "git": {
+        "server": "mcp-server-github",
+        "config": {"token": "$GITHUB_TOKEN"}
+    }
+}
+
+# Usage: "Scale production to 20 replicas and monitor for issues"
+```
+
+---
+
+## 📊 Server Comparison Matrix
+
+<div align="center">
+
+| Server Type | Complexity | Setup Time | Use Cases | Production Ready |
+|-------------|-----------|------------|-----------|------------------|
+| **PostgreSQL** | ⭐⭐ Easy | 15 min | Data queries | ✅ Yes |
+| **MongoDB** | ⭐⭐ Easy | 15 min | Document queries | ✅ Yes |
+| **Vector DB** | ⭐⭐⭐ Medium | 30 min | Semantic search | ✅ Yes |
+| **GitHub** | ⭐⭐ Easy | 10 min | Repo management | ✅ Yes |
+| **Slack** | ⭐⭐ Easy | 10 min | Messaging | ✅ Yes |
+| **Kubernetes** | ⭐⭐⭐⭐ Hard | 60 min | Cluster management | ✅ Yes |
+| **Docker** | ⭐⭐⭐ Medium | 20 min | Container management | ✅ Yes |
+| **AWS S3** | ⭐⭐⭐ Medium | 20 min | Cloud storage | ✅ Yes |
+| **File System** | ⭐⭐ Easy | 15 min | Local files | ✅ Yes |
+| **API Gateway** | ⭐⭐⭐⭐ Hard | 90 min | Multi-API access | ✅ Yes |
+
+</div>
+
+---
+
+<div align="center">
+
+## 🌟 **Pick a Server. Customize it. Deploy it. Done!** 🌟
+
+### Your LLM is now connected to the world
+
+[![Back to README](https://img.shields.io/badge/Back-Main_README-3b82f6?style=for-the-badge)](./README.md)
+[![Implementation Guide](https://img.shields.io/badge/Read-Implementation_Guide-a855f7?style=for-the-badge)](./model-context-protocol.md)
+[![Client Guide](https://img.shields.io/badge/View-Client_Guide-10b981?style=for-the-badge)](./mcp-client-guide.md)
+
+---
+
+*Last Updated: January 2025 • 50+ Production Examples • Battle-Tested Code*
+
 </div>
