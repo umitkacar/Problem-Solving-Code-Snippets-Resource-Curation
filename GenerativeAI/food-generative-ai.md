@@ -687,7 +687,7 @@ Help build the future of food tech!
 
 ---
 
-**Last Updated:** November 2025
+**Last Updated:** January 2025
 
 *AI-Powered Culinary Innovation for Everyone*
 

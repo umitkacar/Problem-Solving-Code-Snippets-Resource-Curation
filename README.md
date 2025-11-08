@@ -24,7 +24,7 @@
 
 ### 💡 **A Hybrid Approach: LLM-Optimized Code Snippets + Curated AI/ML Resources**
 
-**Last Updated:** 2025-11-07 | **Code Snippets:** 500+ | **Resources:** 1000+ | **Categories:** 20+
+**Last Updated:** 2025-01-08 | **Code Snippets:** 500+ | **Resources:** 1000+ | **Categories:** 20+
 
 </div>
 
@@ -796,6 +796,8 @@ Theory + Practice + Production
   <a href="CONTRIBUTING.md">🤝 Contribute</a>
   •
   <a href="#-trending-ai-2024-2025">🔥 View Trending</a>
+  •
+  <a href="#-problem-solving-code-snippets--resource-curation">⬆️ Back to Top</a>
 </p>
 
 ---
@@ -823,6 +825,6 @@ Theory + Practice + Production
 
 ---
 
-<sub>🔄 **Last Updated:** November 2025 | 📊 **Next Update:** December 2025 | 🆕 **Added:** 50+ trending 2024-2025 resources</sub>
+<sub>🔄 **Last Updated:** January 2025 | 📊 **Next Update:** February 2025 | 🆕 **Added:** 50+ trending 2024-2025 resources</sub>
 
 </div>

@@ -738,7 +738,7 @@ Help improve this resource!
 
 ---
 
-**Last Updated:** November 2025
+**Last Updated:** January 2025
 
 *Enhance your images with cutting-edge AI!*
 

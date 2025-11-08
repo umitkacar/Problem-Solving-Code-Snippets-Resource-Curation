@@ -1074,7 +1074,7 @@ If this resource helped you, please star the repository!
 
 ---
 
-**Last Updated:** November 2025 | **Next Update:** Monthly
+**Last Updated:** January 2025 | **Next Update:** Monthly
 
 *Stay tuned for updates on new models and techniques!*
 

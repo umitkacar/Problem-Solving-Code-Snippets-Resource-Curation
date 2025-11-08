@@ -1,501 +1,856 @@
-# 💻 Software Development Best Practices
+<div align="center">
 
-**Last Updated:** 2025-06-19
+# 💻 Modern Software Development Mastery
 
-## Overview
-Comprehensive guide to software development best practices, covering coding standards, design patterns, development methodologies, and professional growth strategies.
+### *From Code Quality to Production Excellence - 2025 Best Practices*
 
-## 🎯 Clean Code Principles
+<img src="https://img.shields.io/badge/Status-Updated_2025-success?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Updated 2025" />
+<img src="https://img.shields.io/badge/Topics-60%2B-blueviolet?style=for-the-badge&logo=bookstack&logoColor=white" alt="60+ Topics" />
+<img src="https://img.shields.io/badge/Level-All_Levels-orange?style=for-the-badge&logo=stackexchange&logoColor=white" alt="All Levels" />
+<img src="https://img.shields.io/badge/Focus-Production_Ready-critical?style=for-the-badge&logo=rocket&logoColor=white" alt="Production Ready" />
 
-### The SOLID Principles
+</div>
+
+---
+
+## 🎯 Quick Navigation
+
+```mermaid
+graph LR
+    A[🚀 Start Here] --> B{Your Focus?}
+    B -->|Code Quality| C[Clean Code]
+    B -->|Architecture| D[Design Patterns]
+    B -->|Process| E[Methodologies]
+    B -->|Production| F[DevOps & Deploy]
+
+    C --> G[SOLID Principles]
+    D --> H[Modern Patterns]
+    E --> I[Agile 2025]
+    F --> J[CI/CD]
+
+    style A fill:#9b59b6,stroke:#8e44ad,stroke-width:3px,color:#fff
+    style C fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+    style D fill:#e67e22,stroke:#d35400,stroke-width:2px,color:#fff
+    style E fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
+    style F fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+```
+
+---
+
+## 📚 Learning Paths
+
+```mermaid
+graph TD
+    A[👨‍💻 Software Developer] --> B{Experience Level?}
+
+    B --> C[🟢 Junior<br/>0-2 years]
+    B --> D[🟡 Mid-Level<br/>2-5 years]
+    B --> E[🔴 Senior<br/>5+ years]
+
+    C --> C1[Clean Code]
+    C1 --> C2[Git Basics]
+    C2 --> C3[Testing]
+    C3 --> C4[First Project]
+
+    D --> D1[Design Patterns]
+    D1 --> D2[Architecture]
+    D2 --> D3[System Design]
+    D3 --> D4[Team Lead]
+
+    E --> E1[Distributed Systems]
+    E1 --> E2[Scalability]
+    E2 --> E3[Technical Strategy]
+    E3 --> E4[Architecture Lead]
+
+    style A fill:#9b59b6,stroke:#8e44ad,stroke-width:3px,color:#fff
+    style C fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
+    style D fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
+    style E fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+```
+
+---
+
+## 🏆 Clean Code Principles
+
+### SOLID Principles (2025 Edition)
+
+<details open>
+<summary><b>💡 Click to expand: The Foundation of Clean Code</b></summary>
+
+#### Quick Reference Table
+
+| Principle | Meaning | Impact | Difficulty |
+|-----------|---------|--------|------------|
+| **S**ingle Responsibility | One class = One reason to change | ⭐⭐⭐⭐⭐ | 🟢 Easy |
+| **O**pen/Closed | Open for extension, closed for modification | ⭐⭐⭐⭐⭐ | 🟡 Medium |
+| **L**iskov Substitution | Subtypes must be substitutable | ⭐⭐⭐⭐ | 🔴 Hard |
+| **I**nterface Segregation | Many specific interfaces > one general | ⭐⭐⭐⭐ | 🟢 Easy |
+| **D**ependency Inversion | Depend on abstractions, not concretions | ⭐⭐⭐⭐⭐ | 🟡 Medium |
+
+#### Modern Examples (Python & TypeScript)
+
 ```python
-# S - Single Responsibility Principle
-# Bad example
-class UserManager:
-    def create_user(self, data):
-        # Creates user
-        pass
-    
-    def send_email(self, user):
-        # Sends email - violates SRP!
-        pass
-    
-    def generate_report(self):
-        # Generates report - violates SRP!
+# ❌ BAD: Violates Single Responsibility
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def save_to_database(self):  # Database logic
         pass
 
-# Good example
-class UserService:
-    def create_user(self, data):
-        # Only handles user creation
+    def send_welcome_email(self):  # Email logic
         pass
 
-class EmailService:
-    def send_welcome_email(self, user):
-        # Only handles email sending
+    def generate_report(self):  # Reporting logic
         pass
 
-class ReportService:
-    def generate_user_report(self):
-        # Only handles report generation
-        pass
-
-# O - Open/Closed Principle
+# ✅ GOOD: Single Responsibility (2025 Best Practice)
+from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
-class Shape(ABC):
+@dataclass
+class User:
+    """Domain model - only user data"""
+    name: str
+    email: str
+    id: str | None = None
+
+class UserRepository(ABC):
+    """Handles data persistence"""
     @abstractmethod
-    def area(self):
+    async def save(self, user: User) -> User:
         pass
 
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-    
-    def area(self):
-        return self.width * self.height
-
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-    
-    def area(self):
-        return 3.14159 * self.radius ** 2
-
-# L - Liskov Substitution Principle
-class Bird:
-    def fly(self):
-        return "Flying"
-
-class Sparrow(Bird):
-    def fly(self):
-        return "Sparrow flying"
-
-# Bad: Penguin can't fly!
-class Penguin(Bird):
-    def fly(self):
-        raise NotImplementedError("Penguins can't fly")
-
-# Good: Better hierarchy
-class Bird:
-    def move(self):
-        pass
-
-class FlyingBird(Bird):
-    def fly(self):
-        pass
-
-class SwimmingBird(Bird):
-    def swim(self):
-        pass
-
-# I - Interface Segregation Principle
-# Bad: Fat interface
-class Worker:
-    def work(self):
-        pass
-    
-    def eat(self):
-        pass
-    
-    def sleep(self):
-        pass
-
-# Good: Segregated interfaces
-class Workable(ABC):
     @abstractmethod
-    def work(self):
+    async def find_by_id(self, user_id: str) -> User | None:
         pass
 
-class Eatable(ABC):
+class EmailService(ABC):
+    """Handles email notifications"""
     @abstractmethod
-    def eat(self):
+    async def send_welcome(self, user: User) -> None:
         pass
 
-class Human(Workable, Eatable):
-    def work(self):
-        return "Working"
-    
-    def eat(self):
-        return "Eating"
+class ReportGenerator:
+    """Handles report generation"""
+    def generate_user_report(self, user: User) -> dict:
+        return {"name": user.name, "email": user.email}
 
-# D - Dependency Inversion Principle
-# Bad: High-level module depends on low-level module
-class EmailSender:
-    def send(self, message):
-        # SMTP implementation
-        pass
+# Usage with Dependency Injection
+class UserService:
+    def __init__(
+        self,
+        repository: UserRepository,
+        email_service: EmailService
+    ):
+        self.repository = repository
+        self.email_service = email_service
 
-class Notification:
-    def __init__(self):
-        self.email_sender = EmailSender()  # Direct dependency!
-    
-    def notify(self, message):
-        self.email_sender.send(message)
-
-# Good: Depend on abstractions
-class MessageSender(ABC):
-    @abstractmethod
-    def send(self, message):
-        pass
-
-class EmailSender(MessageSender):
-    def send(self, message):
-        # SMTP implementation
-        pass
-
-class SMSSender(MessageSender):
-    def send(self, message):
-        # SMS implementation
-        pass
-
-class Notification:
-    def __init__(self, sender: MessageSender):
-        self.sender = sender  # Dependency injection
-    
-    def notify(self, message):
-        self.sender.send(message)
+    async def create_user(self, name: str, email: str) -> User:
+        user = User(name=name, email=email)
+        user = await self.repository.save(user)
+        await self.email_service.send_welcome(user)
+        return user
 ```
 
-### Code Readability
-```javascript
-// Bad: Unclear naming and structure
-function calc(x, y, z) {
-    if (z == 1) {
-        return x + y;
-    } else if (z == 2) {
-        return x - y;
-    } else if (z == 3) {
-        return x * y;
-    }
-    return x / y;
+#### TypeScript Modern Example (2025)
+
+```typescript
+// ✅ Dependency Inversion with Interfaces
+interface IPaymentProcessor {
+  processPayment(amount: number): Promise<PaymentResult>;
 }
 
-// Good: Clear naming and structure
-const MathOperation = {
-    ADD: 'add',
-    SUBTRACT: 'subtract',
-    MULTIPLY: 'multiply',
-    DIVIDE: 'divide'
-};
-
-function calculateResult(firstNumber, secondNumber, operation) {
-    const operations = {
-        [MathOperation.ADD]: (a, b) => a + b,
-        [MathOperation.SUBTRACT]: (a, b) => a - b,
-        [MathOperation.MULTIPLY]: (a, b) => a * b,
-        [MathOperation.DIVIDE]: (a, b) => {
-            if (b === 0) {
-                throw new Error('Division by zero');
-            }
-            return a / b;
-        }
-    };
-    
-    const calculate = operations[operation];
-    if (!calculate) {
-        throw new Error(`Unknown operation: ${operation}`);
-    }
-    
-    return calculate(firstNumber, secondNumber);
+interface INotificationService {
+  notify(message: string): Promise<void>;
 }
 
-// Even better: Use a class
-class Calculator {
-    constructor() {
-        this.operations = new Map([
-            ['add', (a, b) => a + b],
-            ['subtract', (a, b) => a - b],
-            ['multiply', (a, b) => a * b],
-            ['divide', (a, b) => this.safeDivide(a, b)]
-        ]);
+// Concrete implementations
+class StripePaymentProcessor implements IPaymentProcessor {
+  async processPayment(amount: number): Promise<PaymentResult> {
+    // Stripe API call
+    return { success: true, transactionId: "stripe_123" };
+  }
+}
+
+class EmailNotificationService implements INotificationService {
+  async notify(message: string): Promise<void> {
+    console.log(`Email sent: ${message}`);
+  }
+}
+
+// High-level module depends on abstractions
+class OrderService {
+  constructor(
+    private paymentProcessor: IPaymentProcessor,
+    private notificationService: INotificationService
+  ) {}
+
+  async placeOrder(amount: number): Promise<void> {
+    const result = await this.paymentProcessor.processPayment(amount);
+
+    if (result.success) {
+      await this.notificationService.notify(
+        `Payment successful: ${result.transactionId}`
+      );
     }
-    
-    safeDivide(dividend, divisor) {
-        if (divisor === 0) {
-            throw new Error('Cannot divide by zero');
-        }
-        return dividend / divisor;
-    }
-    
-    calculate(a, b, operation) {
-        const operation = this.operations.get(operation);
-        if (!operation) {
-            throw new Error(`Operation "${operation}" is not supported`);
-        }
-        return operation(a, b);
-    }
+  }
+}
+
+// Easy to test with mocks!
+const orderService = new OrderService(
+  new StripePaymentProcessor(),
+  new EmailNotificationService()
+);
+```
+
+</details>
+
+---
+
+## 🏗️ Modern Design Patterns (2025)
+
+### Pattern Comparison Matrix
+
+<table>
+<tr>
+<th>Pattern</th>
+<th>Category</th>
+<th>Use Case</th>
+<th>Popularity 2025</th>
+<th>Difficulty</th>
+</tr>
+<tr>
+<td><b>Singleton</b></td>
+<td>Creational</td>
+<td>Single instance (use sparingly!)</td>
+<td>⚠️ Declining (use DI instead)</td>
+<td>🟢 Easy</td>
+</tr>
+<tr>
+<td><b>Factory</b></td>
+<td>Creational</td>
+<td>Object creation</td>
+<td>↗️ Growing</td>
+<td>🟢 Easy</td>
+</tr>
+<tr>
+<td><b>Builder</b></td>
+<td>Creational</td>
+<td>Complex object construction</td>
+<td>↗️ Growing</td>
+<td>🟡 Medium</td>
+</tr>
+<tr>
+<td><b>Observer</b></td>
+<td>Behavioral</td>
+<td>Event-driven systems</td>
+<td>🔥 Hot (reactive programming)</td>
+<td>🟡 Medium</td>
+</tr>
+<tr>
+<td><b>Strategy</b></td>
+<td>Behavioral</td>
+<td>Algorithm selection</td>
+<td>→ Stable</td>
+<td>🟢 Easy</td>
+</tr>
+<tr>
+<td><b>Repository</b></td>
+<td>Architectural</td>
+<td>Data access abstraction</td>
+<td>🔥 Essential</td>
+<td>🟡 Medium</td>
+</tr>
+<tr>
+<td><b>CQRS</b></td>
+<td>Architectural</td>
+<td>Separate read/write models</td>
+<td>↗️ Growing</td>
+<td>🔴 Hard</td>
+</tr>
+</table>
+
+### 🆕 2024-2025 Trending Patterns
+
+<details open>
+<summary><b>🔥 Modern Patterns You Should Know</b></summary>
+
+#### 1. Repository Pattern with Generic Types
+
+```typescript
+// Modern Repository Pattern (TypeScript 2025)
+interface IRepository<T> {
+  findById(id: string): Promise<T | null>;
+  findAll(filter?: Partial<T>): Promise<T[]>;
+  create(entity: T): Promise<T>;
+  update(id: string, entity: Partial<T>): Promise<T>;
+  delete(id: string): Promise<void>;
+}
+
+// Generic Base Repository
+abstract class BaseRepository<T extends { id?: string }> implements IRepository<T> {
+  constructor(protected collection: string) {}
+
+  async findById(id: string): Promise<T | null> {
+    // Implementation with your ORM/database
+    return null;
+  }
+
+  async findAll(filter?: Partial<T>): Promise<T[]> {
+    return [];
+  }
+
+  async create(entity: T): Promise<T> {
+    entity.id = crypto.randomUUID();
+    // Save to database
+    return entity;
+  }
+
+  async update(id: string, entity: Partial<T>): Promise<T> {
+    // Update in database
+    return entity as T;
+  }
+
+  async delete(id: string): Promise<void> {
+    // Delete from database
+  }
+}
+
+// Specific repository
+class UserRepository extends BaseRepository<User> {
+  constructor() {
+    super("users");
+  }
+
+  // Add user-specific methods
+  async findByEmail(email: string): Promise<User | null> {
+    // Custom query
+    return null;
+  }
 }
 ```
 
-## 🏗️ Design Patterns
+#### 2. Event-Driven Architecture Pattern
 
-### Creational Patterns
 ```python
-# Singleton Pattern
-class DatabaseConnection:
-    _instance = None
-    
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(DatabaseConnection, cls).__new__(cls)
-            cls._instance.connection = None
-        return cls._instance
-    
-    def connect(self, connection_string):
-        if self.connection is None:
-            self.connection = self._create_connection(connection_string)
-        return self.connection
-    
-    def _create_connection(self, connection_string):
-        # Actual connection logic
-        return f"Connected to {connection_string}"
+# Event-Driven Pattern (Python 2025)
+from dataclasses import dataclass
+from typing import Callable, Dict, List
+from datetime import datetime
 
-# Factory Pattern
-class AnimalFactory:
-    @staticmethod
-    def create_animal(animal_type):
-        animals = {
-            'dog': Dog,
-            'cat': Cat,
-            'bird': Bird
-        }
-        
-        animal_class = animals.get(animal_type.lower())
-        if animal_class:
-            return animal_class()
-        raise ValueError(f"Unknown animal type: {animal_type}")
+@dataclass
+class Event:
+    """Base event class"""
+    event_type: str
+    timestamp: datetime
+    data: dict
 
-# Builder Pattern
-class Pizza:
+class EventBus:
+    """Simple in-memory event bus"""
+
     def __init__(self):
-        self.size = None
-        self.cheese = False
-        self.pepperoni = False
-        self.mushrooms = False
-    
-    def __str__(self):
-        toppings = []
-        if self.cheese:
-            toppings.append("cheese")
-        if self.pepperoni:
-            toppings.append("pepperoni")
-        if self.mushrooms:
-            toppings.append("mushrooms")
-        
-        return f"{self.size} pizza with {', '.join(toppings)}"
+        self._subscribers: Dict[str, List[Callable]] = {}
 
-class PizzaBuilder:
-    def __init__(self):
-        self.pizza = Pizza()
-    
-    def set_size(self, size):
-        self.pizza.size = size
-        return self
-    
-    def add_cheese(self):
-        self.pizza.cheese = True
-        return self
-    
-    def add_pepperoni(self):
-        self.pizza.pepperoni = True
-        return self
-    
-    def add_mushrooms(self):
-        self.pizza.mushrooms = True
-        return self
-    
-    def build(self):
-        return self.pizza
+    def subscribe(self, event_type: str, handler: Callable):
+        """Subscribe to an event"""
+        if event_type not in self._subscribers:
+            self._subscribers[event_type] = []
+        self._subscribers[event_type].append(handler)
+
+    async def publish(self, event: Event):
+        """Publish an event to all subscribers"""
+        if event.event_type in self._subscribers:
+            for handler in self._subscribers[event.event_type]:
+                await handler(event)
 
 # Usage
-pizza = PizzaBuilder() \
-    .set_size("large") \
-    .add_cheese() \
-    .add_pepperoni() \
-    .build()
+event_bus = EventBus()
+
+# Subscribe to events
+async def on_user_created(event: Event):
+    print(f"New user: {event.data['email']}")
+    # Send welcome email
+
+async def on_user_created_analytics(event: Event):
+    print("Track user signup in analytics")
+
+event_bus.subscribe("user.created", on_user_created)
+event_bus.subscribe("user.created", on_user_created_analytics)
+
+# Publish event
+await event_bus.publish(Event(
+    event_type="user.created",
+    timestamp=datetime.now(),
+    data={"email": "user@example.com"}
+))
 ```
 
-### Behavioral Patterns
+</details>
+
+---
+
+## 🔄 Development Methodologies (2025 Edition)
+
+### Methodology Comparison
+
+```mermaid
+mindmap
+  root((Development<br/>Methodologies))
+    Agile
+      Scrum 2.0
+      Kanban
+      Scrumban
+      SAFe
+    Modern Practices
+      DevOps
+      DevSecOps
+      GitOps
+      Platform Engineering
+    Specialized
+      Extreme Programming
+      Feature Driven
+      Domain Driven Design
+    Emerging
+      Shape Up Basecamp
+      Team Topologies
+      Continuous Discovery
+```
+
+### 🆕 Modern Agile (2024-2025)
+
+<details open>
+<summary><b>📊 What's Changed in Agile</b></summary>
+
+#### Evolution of Agile Practices
+
+| Practice | 2020 | 2025 | Trend |
+|----------|------|------|-------|
+| **Daily Standups** | In-person, same time | Async-first, flexible | ↗️ Async |
+| **Sprint Length** | 2 weeks standard | 1-2 weeks, team choice | → Flexible |
+| **Planning** | Detailed upfront | Continuous refinement | ↗️ Continuous |
+| **Estimation** | Story points | #NoEstimates movement | ⚠️ Debated |
+| **Retrospectives** | End of sprint | Continuous feedback | ↗️ Ongoing |
+| **Documentation** | Minimal | Just enough, automated | ↗️ Auto-generated |
+
+#### Modern Sprint Workflow
+
+```mermaid
+gantt
+    title Modern 2-Week Sprint (2025)
+    dateFormat YYYY-MM-DD
+    section Planning
+    Sprint Planning (Async)      :2025-01-01, 1d
+    section Development
+    Feature Work (Continuous)    :2025-01-02, 8d
+    Pair Programming Sessions    :2025-01-03, 6d
+    Code Reviews (Ongoing)       :2025-01-02, 9d
+    section Quality
+    Automated Testing (CI/CD)    :2025-01-02, 10d
+    Security Scans               :2025-01-02, 10d
+    section Delivery
+    Demo & Feedback              :2025-01-10, 1d
+    Retrospective (Async)        :2025-01-11, 1d
+    Deploy to Production         :2025-01-11, 1d
+```
+
+</details>
+
+---
+
+## 🧪 Testing Best Practices (2025)
+
+### Testing Pyramid 2.0
+
+```mermaid
+graph TD
+    A[E2E Tests<br/>10%<br/>⏱️ Slow, 💰 Expensive] --> B[Integration Tests<br/>30%<br/>⏱️ Medium, 💰 Moderate]
+    B --> C[Unit Tests<br/>60%<br/>⏱️ Fast, 💰 Cheap]
+
+    style A fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style B fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
+    style C fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
+```
+
+### Modern Testing Stack Comparison
+
+| Framework | Language | Speed | Learning Curve | 2025 Status |
+|-----------|----------|-------|----------------|-------------|
+| **Vitest** | JS/TS | ⚡⚡⚡ Very Fast | 🟢 Easy | 🔥 Hot |
+| **Jest** | JS/TS | ⚡⚡ Fast | 🟢 Easy | → Stable |
+| **Pytest** | Python | ⚡⚡⚡ Very Fast | 🟢 Easy | 🔥 Industry Standard |
+| **JUnit 5** | Java | ⚡⚡ Fast | 🟡 Medium | → Stable |
+| **Playwright** | E2E Multi-lang | ⚡⚡ Fast | 🟡 Medium | 🔥 Growing |
+| **Cypress** | E2E JS | ⚡ Medium | 🟢 Easy | → Stable |
+
+### Example: Modern Test Structure
+
 ```python
-# Observer Pattern
-class Subject:
-    def __init__(self):
-        self._observers = []
-        self._state = None
-    
-    def attach(self, observer):
-        self._observers.append(observer)
-    
-    def detach(self, observer):
-        self._observers.remove(observer)
-    
-    def notify(self):
-        for observer in self._observers:
-            observer.update(self._state)
-    
-    @property
-    def state(self):
-        return self._state
-    
-    @state.setter
-    def state(self, state):
-        self._state = state
-        self.notify()
+# Modern Python Testing (2025 Best Practices)
+import pytest
+from unittest.mock import AsyncMock, Mock
+from datetime import datetime
 
-class Observer(ABC):
-    @abstractmethod
-    def update(self, state):
-        pass
+# Fixtures for dependency injection
+@pytest.fixture
+def user_repository():
+    """Mock user repository"""
+    repo = AsyncMock()
+    repo.save.return_value = User(id="123", name="Test", email="test@example.com")
+    return repo
 
-class ConcreteObserver(Observer):
-    def __init__(self, name):
-        self.name = name
-    
-    def update(self, state):
-        print(f"{self.name} received update: {state}")
+@pytest.fixture
+def email_service():
+    """Mock email service"""
+    return AsyncMock()
 
-# Strategy Pattern
-class PaymentStrategy(ABC):
-    @abstractmethod
-    def pay(self, amount):
-        pass
+@pytest.fixture
+def user_service(user_repository, email_service):
+    """User service with mocked dependencies"""
+    return UserService(user_repository, email_service)
 
-class CreditCardPayment(PaymentStrategy):
-    def __init__(self, card_number):
-        self.card_number = card_number
-    
-    def pay(self, amount):
-        return f"Paid ${amount} using Credit Card {self.card_number[-4:]}"
+# Parametrized tests
+@pytest.mark.parametrize("name,email,should_pass", [
+    ("John Doe", "john@example.com", True),
+    ("", "invalid", False),
+    ("Jane", "jane@example.com", True),
+])
+async def test_create_user_validation(
+    user_service,
+    name,
+    email,
+    should_pass
+):
+    """Test user creation with various inputs"""
+    if should_pass:
+        user = await user_service.create_user(name, email)
+        assert user.name == name
+        assert user.email == email
+    else:
+        with pytest.raises(ValidationError):
+            await user_service.create_user(name, email)
 
-class PayPalPayment(PaymentStrategy):
-    def __init__(self, email):
-        self.email = email
-    
-    def pay(self, amount):
-        return f"Paid ${amount} using PayPal account {self.email}"
+# Integration test with actual database
+@pytest.mark.integration
+async def test_user_creation_flow(db_session):
+    """Full user creation flow with real database"""
+    repo = UserRepository(db_session)
+    email = EmailService()
+    service = UserService(repo, email)
 
-class ShoppingCart:
-    def __init__(self):
-        self.items = []
-        self.payment_strategy = None
-    
-    def set_payment_strategy(self, strategy: PaymentStrategy):
-        self.payment_strategy = strategy
-    
-    def checkout(self):
-        total = sum(item['price'] for item in self.items)
-        if self.payment_strategy:
-            return self.payment_strategy.pay(total)
-        raise ValueError("No payment strategy set")
+    user = await service.create_user("Integration Test", "int@test.com")
+
+    # Verify user in database
+    found_user = await repo.find_by_id(user.id)
+    assert found_user is not None
+    assert found_user.email == "int@test.com"
 ```
 
-## 🔄 Development Methodologies
+---
 
-### Agile Development
-```markdown
-## Agile Principles
-1. **Individuals and interactions** over processes and tools
-2. **Working software** over comprehensive documentation
-3. **Customer collaboration** over contract negotiation
-4. **Responding to change** over following a plan
+## 🚀 CI/CD & DevOps (2025)
 
-## Scrum Framework
-- **Sprint Planning**: Define sprint goals and tasks
-- **Daily Standup**: What I did, will do, blockers
-- **Sprint Review**: Demo completed work
-- **Sprint Retrospective**: Improve process
+### Modern CI/CD Pipeline
 
-## Kanban Board Example
-| Backlog | To Do | In Progress | Testing | Done |
-|---------|-------|-------------|---------|------|
-| Task 5  | Task 3| Task 2      | Task 1  | Task 0|
-| Task 6  | Task 4|             |         |      |
+```mermaid
+graph LR
+    A[💻 Push Code] --> B[🧪 Run Tests]
+    B --> C[📊 Code Quality]
+    C --> D[🔒 Security Scan]
+    D --> E[🏗️ Build]
+    E --> F[📦 Containerize]
+    F --> G{Environment}
 
-## User Story Format
-As a [type of user],
-I want [goal/desire],
-So that [benefit/value].
+    G -->|Auto| H[🌍 Dev]
+    G -->|Manual Approve| I[🟢 Staging]
+    I -->|Manual Approve| J[🔴 Production]
 
-### Example:
-As a **customer**,
-I want **to filter products by price**,
-So that **I can find products within my budget**.
+    H --> K[🎉 Deploy]
+    I --> K
+    J --> K
 
-## Acceptance Criteria
-- GIVEN a product listing page
-- WHEN I set a price range filter
-- THEN only products within that range are displayed
+    K --> L[📈 Monitor]
+
+    style A fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
+    style J fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style K fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
 ```
 
-### Test-Driven Development (TDD)
+### GitHub Actions Example (2025 Best Practices)
+
+```yaml
+# .github/workflows/ci-cd.yml
+name: Modern CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+# Permissions for security
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  # Job 1: Test
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run type check
+        run: npm run type-check
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/coverage-final.json
+
+  # Job 2: Security
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Job 3: Build & Deploy
+  build-and-deploy:
+    needs: [test, security]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: myapp:${{ github.sha }},myapp:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy to production
+        run: |
+          # Deploy using your method (k8s, cloud, etc.)
+          echo "Deploying ${{ github.sha }}"
+```
+
+---
+
+## 📚 Essential Learning Resources
+
+### 📖 Must-Read Books (Updated 2025)
+
+<table>
+<tr>
+<th>Book</th>
+<th>Author</th>
+<th>Focus</th>
+<th>Level</th>
+<th>2025 Relevance</th>
+</tr>
+<tr>
+<td><b>"Clean Code"</b></td>
+<td>Robert C. Martin</td>
+<td>Code Quality</td>
+<td>🟢 All</td>
+<td>⭐⭐⭐⭐⭐ Timeless</td>
+</tr>
+<tr>
+<td><b>"The Pragmatic Programmer"</b> (20th Ed)</td>
+<td>Hunt & Thomas</td>
+<td>General Best Practices</td>
+<td>🟡 Intermediate</td>
+<td>⭐⭐⭐⭐⭐ Updated 2024</td>
+</tr>
+<tr>
+<td><b>"Designing Data-Intensive Applications"</b></td>
+<td>Martin Kleppmann</td>
+<td>System Design</td>
+<td>🔴 Advanced</td>
+<td>⭐⭐⭐⭐⭐ Essential</td>
+</tr>
+<tr>
+<td><b>"System Design Interview"</b> (Vol 1 & 2)</td>
+<td>Alex Xu</td>
+<td>Interviews</td>
+<td>🟡 Intermediate</td>
+<td>🔥 Hot in 2024</td>
+</tr>
+<tr>
+<td><b>"Software Engineering at Google"</b></td>
+<td>Winters, Manshreck, Wright</td>
+<td>Large Scale</td>
+<td>🔴 Advanced</td>
+<td>⭐⭐⭐⭐⭐ Industry Insights</td>
+</tr>
+<tr>
+<td><b>"Accelerate"</b></td>
+<td>Forsgren, Humble, Kim</td>
+<td>DevOps Metrics</td>
+<td>🟡 Intermediate</td>
+<td>⭐⭐⭐⭐⭐ Data-Driven</td>
+</tr>
+</table>
+
+### 🎓 Top Online Courses (2024-2025)
+
+| Course | Platform | Level | Updated | Focus |
+|--------|----------|-------|---------|-------|
+| **Grokking System Design** | Educative | 🔴 Advanced | 2024 | Interviews |
+| **Software Architecture** | Coursera | 🟡 Intermediate | 2024 | Patterns |
+| **Clean Code** | Udemy | 🟢 Beginner | 2024 | Best Practices |
+| **Docker Mastery** | Udemy | 🟡 Intermediate | 2024 | Containers |
+| **Kubernetes Course** | KodeKloud | 🔴 Advanced | 2024 | Orchestration |
+
+---
+
+## 🛠️ Modern Tech Stack (2025)
+
+### Backend Frameworks
+
+```mermaid
+mindmap
+  root((Backend<br/>2025))
+    Node.js Ecosystem
+      Fastify Hot
+      NestJS Popular
+      Express Stable
+      Hono New Rising
+    Python
+      FastAPI Hot
+      Django Stable
+      Flask Declining
+    Go
+      Gin Popular
+      Fiber Fast
+      Echo Stable
+    Rust
+      Axum Growing
+      Actix Mature
+    Java
+      Spring Boot Standard
+      Quarkus Cloud Native
+```
+
+### Frontend Frameworks (2025 Rankings)
+
+| Framework | Trend | Best For | Learning Curve |
+|-----------|-------|----------|----------------|
+| **React** | → Stable | Large apps, ecosystem | 🟡 Medium |
+| **Next.js** | 🔥 Hot | Full-stack React | 🟡 Medium |
+| **Vue 3** | → Stable | Progressive apps | 🟢 Easy |
+| **Svelte/SvelteKit** | ↗️ Growing | Performance | 🟢 Easy |
+| **Solid.js** | ↗️ Rising | Reactive perf | 🟡 Medium |
+| **Astro** | 🔥 Hot | Content sites | 🟢 Easy |
+
+---
+
+## 💡 Pro Tips & Best Practices
+
+### Code Review Checklist
+
 ```python
-# Step 1: Write a failing test
-import unittest
+code_review_checklist = {
+    "functionality": [
+        "✅ Does the code do what it's supposed to?",
+        "✅ Edge cases handled?",
+        "✅ Error handling in place?"
+    ],
 
-class TestCalculator(unittest.TestCase):
-    def test_add_positive_numbers(self):
-        calc = Calculator()
-        result = calc.add(2, 3)
-        self.assertEqual(result, 5)
-    
-    def test_add_negative_numbers(self):
-        calc = Calculator()
-        result = calc.add(-2, -3)
-        self.assertEqual(result, -5)
-    
-    def test_divide_by_zero(self):
-        calc = Calculator()
-        with self.assertRaises(ValueError):
-            calc.divide(10, 0)
+    "code_quality": [
+        "✅ Follows coding standards?",
+        "✅ No code duplication?",
+        "✅ Clear naming conventions?",
+        "✅ Appropriate comments?"
+    ],
 
-# Step 2: Write minimal code to pass
-class Calculator:
-    def add(self, a, b):
-        return a + b
-    
-    def divide(self, a, b):
-        if b == 0:
-            raise ValueError("Cannot divide by zero")
-        return a / b
+    "testing": [
+        "✅ Unit tests present?",
+        "✅ Tests actually test the logic?",
+        "✅ Edge cases tested?"
+    ],
 
-# Step 3: Refactor if needed
-class Calculator:
-    """A simple calculator with basic operations."""
-    
-    def add(self, a: float, b: float) -> float:
-        """Add two numbers."""
-        return a + b
-    
-    def divide(self, dividend: float, divisor: float) -> float:
-        """Divide two numbers with zero check."""
-        if divisor == 0:
-            raise ValueError("Cannot divide by zero")
-        return dividend / divisor
+    "performance": [
+        "✅ No obvious bottlenecks?",
+        "✅ Efficient algorithms used?",
+        "✅ Database queries optimized?"
+    ],
+
+    "security": [
+        "✅ Input validation?",
+        "✅ No hardcoded secrets?",
+        "✅ SQL injection prevented?",
+        "✅ XSS protection?"
+    ]
+}
 ```
 
-## 🛠️ Development Tools
+### Git Commit Best Practices (2025)
 
-### Version Control Best Practices
 ```bash
-# Git commit message format
-# <type>(<scope>): <subject>
-# 
-# <body>
-# 
-# <footer>
+# Conventional Commits (Industry Standard)
+# Format: <type>(<scope>): <subject>
 
 # Types:
-# feat: New feature
-# fix: Bug fix
-# docs: Documentation changes
-# style: Code style changes
-# refactor: Code refactoring
-# test: Test additions/changes
-# chore: Build process or auxiliary tool changes
+feat:     # New feature
+fix:      # Bug fix
+docs:     # Documentation only
+style:    # Code style (formatting, no logic change)
+refactor: # Code restructure (no feature/fix)
+perf:     # Performance improvement
+test:     # Adding/updating tests
+build:    # Build system changes
+ci:       # CI/CD changes
+chore:    # Other changes
 
-# Example:
+# Examples:
 git commit -m "feat(auth): add JWT token validation
 
 - Implement token validation middleware
@@ -504,376 +859,74 @@ git commit -m "feat(auth): add JWT token validation
 
 Closes #123"
 
-# Git workflow
-# 1. Create feature branch
-git checkout -b feature/user-authentication
+git commit -m "fix(api): resolve race condition in user creation
 
-# 2. Make changes and commit
-git add .
-git commit -m "feat(auth): implement login endpoint"
+The user creation endpoint had a race condition when multiple
+requests arrived simultaneously. Added proper locking mechanism.
 
-# 3. Keep branch updated
-git checkout main
-git pull origin main
-git checkout feature/user-authentication
-git rebase main
-
-# 4. Push and create PR
-git push origin feature/user-authentication
+Fixes #456"
 ```
-
-### Code Review Guidelines
-```markdown
-## Code Review Checklist
-
-### Functionality
-- [ ] Code does what it's supposed to do
-- [ ] Edge cases are handled
-- [ ] No obvious bugs
-
-### Code Quality
-- [ ] Follows coding standards
-- [ ] No code duplication
-- [ ] Clear variable/function names
-- [ ] Appropriate comments
-
-### Testing
-- [ ] Unit tests exist and pass
-- [ ] Test coverage is adequate
-- [ ] Integration tests if needed
-
-### Performance
-- [ ] No obvious performance issues
-- [ ] Efficient algorithms used
-- [ ] Database queries optimized
-
-### Security
-- [ ] Input validation present
-- [ ] No hardcoded secrets
-- [ ] SQL injection prevention
-- [ ] XSS protection
-
-### Documentation
-- [ ] API documentation updated
-- [ ] README updated if needed
-- [ ] Inline comments where necessary
-```
-
-## 📊 Performance Optimization
-
-### Profiling and Optimization
-```python
-import time
-import cProfile
-import pstats
-from functools import lru_cache
-from memory_profiler import profile
-
-# Time profiling
-def time_it(func):
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter()
-        result = func(*args, **kwargs)
-        end = time.perf_counter()
-        print(f"{func.__name__} took {end - start:.4f} seconds")
-        return result
-    return wrapper
-
-# Memory profiling
-@profile
-def memory_intensive_function():
-    # Create large list
-    large_list = [i for i in range(1000000)]
-    # Process list
-    result = sum(large_list)
-    return result
-
-# Optimization techniques
-# 1. Caching
-@lru_cache(maxsize=128)
-def fibonacci(n):
-    if n < 2:
-        return n
-    return fibonacci(n-1) + fibonacci(n-2)
-
-# 2. Use generators for large datasets
-def read_large_file(file_path):
-    with open(file_path, 'r') as file:
-        for line in file:
-            yield line.strip()
-
-# 3. Batch processing
-def process_in_batches(items, batch_size=1000):
-    for i in range(0, len(items), batch_size):
-        batch = items[i:i + batch_size]
-        yield batch
-
-# 4. Async programming
-import asyncio
-import aiohttp
-
-async def fetch_data(session, url):
-    async with session.get(url) as response:
-        return await response.json()
-
-async def fetch_multiple(urls):
-    async with aiohttp.ClientSession() as session:
-        tasks = [fetch_data(session, url) for url in urls]
-        return await asyncio.gather(*tasks)
-```
-
-### Database Optimization
-```sql
--- Index optimization
-CREATE INDEX idx_user_email ON users(email);
-CREATE INDEX idx_order_user_date ON orders(user_id, created_at);
-
--- Query optimization
--- Bad: N+1 query problem
-SELECT * FROM users;
--- Then for each user:
-SELECT * FROM orders WHERE user_id = ?;
-
--- Good: Join query
-SELECT u.*, o.*
-FROM users u
-LEFT JOIN orders o ON u.id = o.user_id
-WHERE u.created_at > '2024-01-01';
-
--- Even better: Only select needed columns
-SELECT u.id, u.name, u.email,
-       o.id as order_id, o.total, o.created_at
-FROM users u
-LEFT JOIN orders o ON u.id = o.user_id
-WHERE u.created_at > '2024-01-01';
-```
-
-## 🔒 Security Best Practices
-
-### Common Security Vulnerabilities
-```python
-# SQL Injection Prevention
-# Bad: String concatenation
-def get_user_bad(user_id):
-    query = f"SELECT * FROM users WHERE id = {user_id}"
-    # Vulnerable to SQL injection!
-
-# Good: Parameterized queries
-def get_user_good(user_id):
-    query = "SELECT * FROM users WHERE id = %s"
-    cursor.execute(query, (user_id,))
-
-# XSS Prevention
-# Bad: Direct HTML insertion
-def display_comment_bad(comment):
-    return f"<div>{comment}</div>"
-    # Vulnerable to XSS!
-
-# Good: HTML escaping
-import html
-
-def display_comment_good(comment):
-    escaped_comment = html.escape(comment)
-    return f"<div>{escaped_comment}</div>"
-
-# Authentication & Authorization
-from functools import wraps
-from flask import g, request, redirect, url_for
-import jwt
-
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        token = request.headers.get('Authorization')
-        if not token:
-            return {'message': 'No token provided'}, 401
-        
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-            g.current_user = payload['user_id']
-        except jwt.ExpiredSignatureError:
-            return {'message': 'Token expired'}, 401
-        except jwt.InvalidTokenError:
-            return {'message': 'Invalid token'}, 401
-        
-        return f(*args, **kwargs)
-    return decorated_function
-
-# Input Validation
-from marshmallow import Schema, fields, validate
-
-class UserSchema(Schema):
-    username = fields.Str(required=True, validate=validate.Length(min=3, max=20))
-    email = fields.Email(required=True)
-    password = fields.Str(required=True, validate=validate.Length(min=8))
-    age = fields.Int(required=True, validate=validate.Range(min=13, max=120))
-
-# Usage
-user_schema = UserSchema()
-errors = user_schema.validate(request.json)
-if errors:
-    return {'errors': errors}, 400
-```
-
-## 🚀 Deployment Best Practices
-
-### CI/CD Pipeline
-```yaml
-# .github/workflows/ci-cd.yml
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
-    
-    - name: Lint with flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source
-        flake8 . --count --exit-zero --max-complexity=10
-    
-    - name: Test with pytest
-      run: |
-        pytest tests/ --cov=app --cov-report=xml
-    
-    - name: Upload coverage
-      uses: codecov/codecov-action@v1
-      with:
-        file: ./coverage.xml
-    
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Deploy to production
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      run: |
-        # Deployment script
-        ./scripts/deploy.sh
-```
-
-### Docker Best Practices
-```dockerfile
-# Multi-stage build
-FROM python:3.9-slim as builder
-
-WORKDIR /app
-
-# Install build dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements first for better caching
-COPY requirements.txt .
-RUN pip install --user -r requirements.txt
-
-# Production stage
-FROM python:3.9-slim
-
-WORKDIR /app
-
-# Create non-root user
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-
-# Copy Python dependencies from builder
-COPY --from=builder /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
-
-# Copy application code
-COPY --chown=appuser:appuser . .
-
-# Switch to non-root user
-USER appuser
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD python -c "import requests; requests.get('http://localhost:8000/health')"
-
-EXPOSE 8000
-
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000", "--workers", "4"]
-```
-
-## 📚 Continuous Learning
-
-### Learning Resources
-```python
-learning_resources = {
-    "books": [
-        "Clean Code - Robert Martin",
-        "Design Patterns - Gang of Four",
-        "The Pragmatic Programmer - Hunt & Thomas",
-        "Refactoring - Martin Fowler",
-        "Code Complete - Steve McConnell"
-    ],
-    
-    "online_courses": [
-        "CS50 - Harvard",
-        "Algorithms - Princeton",
-        "Software Engineering - MIT",
-        "System Design - educative.io"
-    ],
-    
-    "podcasts": [
-        "Software Engineering Daily",
-        "Coding Blocks",
-        "Programming Throwdown",
-        "Developer Tea"
-    ],
-    
-    "practice_platforms": [
-        "LeetCode - Algorithms",
-        "HackerRank - Various challenges",
-        "CodeWars - Kata exercises",
-        "Project Euler - Mathematical problems"
-    ]
-}
-```
-
-### Career Development
-1. **Build a Portfolio**
-   - GitHub contributions
-   - Personal projects
-   - Open source contributions
-   - Technical blog
-
-2. **Soft Skills**
-   - Communication
-   - Problem-solving
-   - Team collaboration
-   - Time management
-
-3. **Stay Updated**
-   - Follow tech blogs
-   - Attend conferences
-   - Join communities
-   - Read documentation
 
 ---
 
-*Excellence in software development is a journey, not a destination* 💻🚀
+<div align="center">
+
+## 🚀 Your Development Journey
+
+```mermaid
+journey
+    title Software Developer Growth Path
+    section Junior
+      Learn fundamentals: 5: You
+      First production code: 4: You
+      Code reviews: 3: You
+    section Mid-Level
+      Design features: 4: You
+      Mentor juniors: 4: You
+      Lead projects: 3: You
+    section Senior
+      Architecture decisions: 5: You
+      Technical strategy: 4: You
+      Thought leadership: 5: You
+```
+
+---
+
+### 📈 Skill Progression Roadmap
+
+| Skill | Junior | Mid | Senior |
+|-------|--------|-----|--------|
+| **Coding** | Write features | Optimize code | Design systems |
+| **Testing** | Unit tests | Integration tests | Test strategy |
+| **Architecture** | Understand patterns | Apply patterns | Create patterns |
+| **Leadership** | Self-management | Mentor 1-2 | Lead team |
+| **Communication** | Updates | Technical docs | Presentations |
+
+---
+
+### 📬 Stay Updated
+
+**Newsletters:**
+- 📧 [TLDR Newsletter](https://tldr.tech/) - Daily tech news
+- 📧 [DevOps Weekly](https://www.devopsweekly.com/)
+- 📧 [JavaScript Weekly](https://javascriptweekly.com/)
+
+**Podcasts:**
+- 🎙️ Software Engineering Daily
+- 🎙️ Syntax.fm
+- 🎙️ The Changelog
+
+**Communities:**
+- 💬 Dev.to
+- 💬 Hashnode
+- 💬 Reddit r/programming
+
+---
+
+**Last Updated:** January 2025 | **Status:** ![Maintained](https://img.shields.io/badge/Maintained-Active-success?style=flat-square)
+
+</div>
+
+---
+
+*"Code is read more than it's written. Make it count."* 💻✨
