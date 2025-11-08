@@ -23,7 +23,7 @@
 *From Beginner to Advanced: Build Production-Ready Generative AI Pipelines*
 
 [![GitHub Stars](https://img.shields.io/github/stars/comfyanonymous/ComfyUI?style=social)](https://github.com/comfyanonymous/ComfyUI)
-[![Last Updated](https://img.shields.io/badge/Last_Updated-November_2025-success?style=flat-square)](https://github.com)
+[![Last Updated](https://img.shields.io/badge/Last_Updated-January_2025-success?style=flat-square)](https://github.com)
 
 </div>
 
@@ -764,7 +764,7 @@ Share your workflows and help the community grow!
 
 ---
 
-**Last Updated:** November 2025 | **Next Update:** Weekly
+**Last Updated:** January 2025 | **Next Update:** Weekly
 
 *Join 100K+ users creating amazing AI art with ComfyUI!*
 

@@ -807,7 +807,7 @@ export default function RootLayout({ children }) {
 
 ---
 
-**Last Updated:** November 2025
+**Last Updated:** January 2025
 
 *Build accessible, beautiful dark mode experiences*
 

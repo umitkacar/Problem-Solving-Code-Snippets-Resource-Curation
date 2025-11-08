@@ -1,324 +1,621 @@
-# Türkçe Yapay Zeka Kaynakları 🇹🇷
+<div align="center">
 
-Türkçe dilinde yapay zeka, makine öğrenmesi ve derin öğrenme kaynakları.
+# 🇹🇷 Türkçe Yapay Zeka Kaynakları
 
-**Last Updated:** 2025-06-19
+### *Turkish AI & ML Resources Hub - 2024-2025 Edition*
 
-**Son Güncelleme:** 2025-06-19
+<img src="https://img.shields.io/badge/Dil-Türkçe-critical?style=for-the-badge&logo=google-translate&logoColor=white" alt="Turkish" />
+<img src="https://img.shields.io/badge/Kaynak-100%2B-blueviolet?style=for-the-badge&logo=bookstack&logoColor=white" alt="100+ Resources" />
+<img src="https://img.shields.io/badge/Güncel-2025-success?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Updated 2025" />
+<img src="https://img.shields.io/badge/Topluluk-Aktif-orange?style=for-the-badge&logo=discord&logoColor=white" alt="Active Community" />
 
-## İçindekiler
-- [Eğitim Platformları](#eğitim-platformları)
-- [YouTube Kanalları](#youtube-kanalları)
-- [Kitaplar](#kitaplar)
-- [Blog ve Websiteleri](#blog-ve-websiteleri)
-- [Açık Kaynak Projeler](#açık-kaynak-projeler)
-- [Türkçe Dil Modelleri](#türkçe-dil-modelleri)
-- [Topluluklar](#topluluklar)
-- [Üniversite Kaynakları](#üniversite-kaynakları)
+</div>
 
-## Eğitim Platformları
+---
 
-### Ücretsiz Platformlar
-**[BTK Akademi](https://www.btkakademi.gov.tr/)** - Devlet destekli eğitim platformu
-- 🆓 Tamamen ücretsiz
-- Yapay zeka temelleri
-- Python ile makine öğrenmesi
-- Sertifikalı
+## 🎯 Hızlı Navigasyon
 
-**[Turkcell Geleceği Yazanlar](https://gelecegiyazanlar.turkcell.com.tr/)** - Turkcell'in eğitim platformu
-- 🆓 Ücretsiz
-- Makine öğrenmesi 101
-- Veri bilimi
-- Proje örnekleri
+```mermaid
+graph LR
+    A[🚀 Başla] --> B{Ne Arıyorsun?}
+    B -->|Eğitim| C[Kurslar]
+    B -->|Kaynak| D[YouTube/Blog]
+    B -->|Model| E[Türkçe LLM'ler]
+    B -->|Topluluk| F[Discord/LinkedIn]
 
-**[Google AI Türkiye](https://ai.google/education/)** - Google'ın Türkçe içerikleri
-- TensorFlow Türkçe
-- Colab kullanımı
-- ML Crash Course Türkçe
+    C --> G[Ücretsiz Platformlar]
+    D --> H[Türkçe İçerikler]
+    E --> I[BERTurk/TURNA]
+    F --> J[Networking]
 
-### Ücretli Platformlar
-**[Udemy Türkçe](https://www.udemy.com/courses/search/?q=yapay%20zeka&src=ukw&lang=tr)** - Türkçe kurslar
-- 💰 Ücretli
-- Geniş içerik yelpazesi
-- Sık indirimler
-- Proje bazlı öğrenme
+    style A fill:#9b59b6,stroke:#8e44ad,stroke-width:3px,color:#fff
+    style C fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+    style D fill:#e67e22,stroke:#d35400,stroke-width:2px,color:#fff
+    style E fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style F fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
+```
 
-**[Kodluyoruz](https://www.kodluyoruz.org/)** - Bootcamp ve eğitimler
-- 🔄 Ücretsiz/Ücretli
-- Veri bilimi patikası
-- Mentorluk desteği
-- İş garantili programlar
+---
 
-## YouTube Kanalları
+## 📚 Eğitim Platformları
 
-### Popüler Türkçe Kanallar
-**[Makine Öğrenmesi](https://www.youtube.com/c/MakineOgrenmesi)** - Dr. Şadi Evren Şeker
-- 🟢 Başlangıç seviyesi
-- Algoritma açıklamaları
-- Teorik temeller
-- Uygulama örnekleri
+### 🆓 Ücretsiz Kaynaklar
 
-**[Veri Bilimi Okulu](https://www.youtube.com/c/VeriBilimiOkulu)** - Mustafa Vahit Keskin
-- Veri bilimi temelleri
-- Python dersleri
-- Gerçek projeler
-- Sektör deneyimleri
+<table>
+<tr>
+<th>Platform</th>
+<th>İçerik</th>
+<th>Seviye</th>
+<th>Sertifika</th>
+<th>2025 Durumu</th>
+</tr>
+<tr>
+<td><b>BTK Akademi</b></td>
+<td>Yapay Zeka, Python, ML</td>
+<td>🟢 Başlangıç</td>
+<td>✅ Var</td>
+<td>🔥 Aktif</td>
+</tr>
+<tr>
+<td><b>Turkcell Geleceği Yazanlar</b></td>
+<td>Veri Bilimi, ML 101</td>
+<td>🟢 Başlangıç</td>
+<td>✅ Var</td>
+<td>→ Stabil</td>
+</tr>
+<tr>
+<td><b>Google AI (Türkçe)</b></td>
+<td>TensorFlow, ML Crash Course</td>
+<td>🟡 Orta</td>
+<td>❌ Yok</td>
+<td>→ Güncel</td>
+</tr>
+<tr>
+<td><b>Kodluyoruz</b></td>
+<td>Veri Bilimi Patikası</td>
+<td>🟢 Başlangıç</td>
+<td>✅ Var</td>
+<td>🔥 Bootcamp</td>
+</tr>
+</table>
 
-**[Deep Learning Türkiye](https://www.youtube.com/c/DeepLearningTurkiye)** - Merve Ayyüce Kızrak
-- 🔴 İleri seviye
-- Derin öğrenme
-- Paper incelemeleri
-- TensorFlow/PyTorch
+---
 
-**[Mert Çobanov](https://www.youtube.com/c/MertCobanov)** - Veri bilimi içerikleri
-- Kaggle yarışmaları
-- Pratik projeler
-- Kariyer tavsiyeleri
-- Canlı yayınlar
+## 🎥 YouTube Kanalları (2024-2025)
 
-**[Selman Bozkır](https://www.youtube.com/channel/UC_UrR5BpVmu6zPiNYwNXRSA)** - AI ve teknoloji
-- Güncel AI haberleri
-- Tool tanıtımları
-- Uygulama örnekleri
+### Popüler Türkçe AI/ML Kanalları
 
-## Kitaplar
+```mermaid
+mindmap
+  root((YouTube<br/>Kanalları))
+    Başlangıç
+      Makine Öğrenmesi Dr Seker
+      Veri Bilimi Okulu
+      Mert Çobanov
+    İleri Seviye
+      Deep Learning Türkiye
+      Ayyüce Kızrak
+    Güncel AI
+      Selman Bozkır AI News
+      ChatGPT Türkiye
+```
 
-### Türkçe Yazılmış Kitaplar
-**"Yapay Zeka"** - Ethem Alpaydın
-- 📚 Akademik
-- Temel kavramlar
-- Matematiksel altyapı
-- MIT Press çevirisi
+### Kanal Karşılaştırması
 
-**"Python ile Makine Öğrenmesi"** - Dr. Şadi Evren Şeker
-- 🟢 Başlangıç seviyesi
-- Kod örnekleri
-- Pratik uygulamalar
-- Türkçe açıklamalar
+| Kanal | Odak | Seviye | Video Sayısı | 2025 Aktiflik |
+|-------|------|--------|--------------|---------------|
+| **Makine Öğrenmesi** (Dr. Şadi Evren Şeker) | Algoritma açıklamaları | 🟢 Başlangıç | 200+ | → Stabil |
+| **Veri Bilimi Okulu** (M.V. Keskin) | Pratik projeler | 🟢-🟡 Karma | 300+ | ↗️ Aktif |
+| **Deep Learning Türkiye** (M.A. Kızrak) | Paper incelemeleri | 🔴 İleri | 150+ | → Stabil |
+| **Mert Çobanov** | Kaggle, Veri Bilimi | 🟡 Orta | 250+ | ↗️ Canlı yayınlar |
+| **Selman Bozkır** | AI haberleri, toollar | 🟢 Herkes | 100+ | 🔥 Çok aktif |
 
-**"Derin Öğrenme"** - Ian Goodfellow (Türkçe Çeviri)
-- 🔴 İleri seviye
-- Kapsamlı içerik
-- Matematiksel detaylar
-- Referans kitap
+---
 
-**"Herkes İçin Yapay Zeka"** - Cem Say
-- 🟢 Giriş seviyesi
-- Teknik olmayan dil
-- AI'ın geleceği
-- Etik konular
+## 📖 Türkçe Kitaplar
 
-### Çeviri Kitaplar
-**"Eller Kirletmeden Makine Öğrenmesi"** - Aurélien Géron (Türkçe)
-- Scikit-learn
-- TensorFlow
-- Pratik yaklaşım
-- Güncel içerik
+### Zorunlu Okumalar
 
-## Blog ve Websiteleri
+<details open>
+<summary><b>📚 Türkiye'de Yazılmış AI/ML Kitapları</b></summary>
 
-### Teknik Bloglar
-**[Deep Learning Türkiye Blog](https://medium.com/deep-learning-turkiye)** - Medium yayını
-- Paper özetleri
-- Türkçe açıklamalar
-- Proje paylaşımları
-- Haftalık bülten
+#### Temel Kitaplar
 
-**[Veri Bilimi İstanbul](https://veribilimi.istanbul/)** - Topluluk blogu
-- Vaka çalışmaları
-- Sektör haberleri
-- Etkinlik duyuruları
-- İş ilanları
+| Kitap | Yazar | Seviye | Yayın Yılı | Durum |
+|-------|-------|--------|------------|-------|
+| **"Yapay Zeka"** | Ethem Alpaydın | 🔴 Akademik | 2020 | Klasik |
+| **"Python ile Makine Öğrenmesi"** | Dr. Ş.E. Şeker | 🟢 Başlangıç | 2021 | ⭐⭐⭐⭐⭐ |
+| **"Herkes İçin Yapay Zeka"** | Cem Say | 🟢 Giriş | 2019 | Popüler |
+| **"Derin Öğrenme"** | Çeviri (Goodfellow) | 🔴 İleri | 2018 | Referans |
+| **"Hands-On ML"** (Türkçe) | Çeviri (Géron) | 🟡 Orta | 2022 | Pratik |
 
-**[AI Türkiye](https://ai-turkey.com/)** - Haber ve kaynak portalı
-- Güncel haberler
-- Makale çevirileri
-- Şirket haberleri
-- Araştırma özetleri
+#### 💡 Neden Önemli?
 
-### Kişisel Bloglar
-**[Zafer Demirkol](https://zaferdemirkol.com/)** - Kişisel blog
-- Makine öğrenmesi
-- Bilgisayarlı görü
-- Kod örnekleri
+```python
+turkish_ai_books = {
+    "장점": [
+        "📖 Anadilde öğrenme daha kolay",
+        "🇹🇷 Türk yazarların bakış açısı",
+        "💼 Türkiye piyasasına uygun örnekler"
+    ],
 
-**[Ayyüce Kızrak](https://ayyucekizrak.github.io/)** - Akademik blog
-- Derin öğrenme
-- Araştırma notları
-- Konferans özetleri
+    "tavsiye": {
+        "başlangıç": "Python ile Makine Öğrenmesi",
+        "teorik": "Yapay Zeka (Alpaydın)",
+        "pratik": "Hands-On ML Türkçe çevirisi"
+    }
+}
+```
 
-## Açık Kaynak Projeler
+</details>
 
-### Türkçe NLP Projeleri
-**[turkish-bert](https://github.com/stefan-it/turkish-bert)** - Türkçe BERT modeli
-- 🆓 Açık kaynak
-- Pre-trained model
-- Fine-tuning örnekleri
-- Hugging Face entegrasyonu
+---
 
-**[zemberek-nlp](https://github.com/ahmetaa/zemberek-nlp)** - Türkçe NLP kütüphanesi
-- Morfolojik analiz
-- Yazım denetimi
-- Kelime öneri
-- Java tabanlı
+## 🤖 Türkçe Dil Modelleri (2024-2025)
 
-**[turkish-nlp-preprocessing](https://github.com/meliketoy/turkish-nlp)** - Preprocessing araçları
-- Python kütüphanesi
-- Temizleme fonksiyonları
-- Normalizasyon
-- Tokenization
+### 🆕 Modern Türkçe LLM'ler
 
-### Türkçe Veri Setleri
-**[Turkish Movie Sentiment](https://github.com/boun-tabi/Turkish-Sentiment-Analysis)** - Film yorumları
-- 50K+ yorum
-- Sentiment etiketleri
-- Benchmark sonuçları
+```mermaid
+timeline
+    title Türkçe LLM Evrimi
+    2018 : İlk Türkçe Word2Vec
+         : Zemberek NLP
+    2020 : BERTurk
+         : İlk Transformer modelleri
+    2021 : ConvBERTurk
+         : Turkish GPT-2
+    2023 : TURNA
+         : Açık kaynak LLM
+    2024 : Llama 3 Turkish Fine-tunes
+         : Mistral Turkish
+         : Gemma Turkish
+    2025 : Gelişmiş Türkçe modeller
+         : Multimodal Türkçe AI
+```
 
-**[TTC-4900](https://github.com/denopas/TTC-4900)** - Türkçe metin sınıflandırma
-- 4900 dokuman
-- 7 kategori
-- Temizlenmiş veri
+### Model Karşılaştırma Tablosu
 
-## Türkçe Dil Modelleri
+<table>
+<tr>
+<th>Model</th>
+<th>Parametre</th>
+<th>Açık Kaynak?</th>
+<th>Kullanım Alanı</th>
+<th>2025 Durumu</th>
+</tr>
+<tr>
+<td><b>BERTurk</b></td>
+<td>128M</td>
+<td>✅ Evet</td>
+<td>Metin sınıflandırma, NER</td>
+<td>→ Hala kullanılıyor</td>
+</tr>
+<tr>
+<td><b>TURNA</b></td>
+<td>1.1B</td>
+<td>✅ Evet</td>
+<td>Çoklu görev, metin üretimi</td>
+<td>→ Popüler</td>
+</tr>
+<tr>
+<td><b>Turkish GPT-2</b></td>
+<td>124M</td>
+<td>✅ Evet</td>
+<td>Metin üretimi</td>
+<td>→ Eski ama işlevsel</td>
+</tr>
+<tr>
+<td><b>mT5-Turkish</b></td>
+<td>Base</td>
+<td>✅ Evet</td>
+<td>Özetleme, çeviri</td>
+<td>→ Multilingual</td>
+</tr>
+<tr>
+<td><b>Llama 3 TR Fine-tune</b></td>
+<td>8B-70B</td>
+<td>✅ Evet</td>
+<td>Genel amaçlı LLM</td>
+<td>🔥 Yeni ve güçlü</td>
+</tr>
+<tr>
+<td><b>Gemini (Turkish support)</b></td>
+<td>Unknown</td>
+<td>❌ Hayır</td>
+<td>Multimodal, sohbet</td>
+<td>🔥 Ticari</td>
+</tr>
+</table>
 
-### Büyük Dil Modelleri
-**[TURNA](https://huggingface.co/boun-tabi-LMG/TURNA)** - Türkçe GPT modeli
-- 🆓 Açık erişim
-- 1.1B parametre
-- Çoklu görev
-- Fine-tuning desteği
+### 🚀 Hızlı Başlangıç: Türkçe Model Kullanımı
 
-**[mT5-turkish](https://huggingface.co/google/mt5-base)** - Multilingual T5
-- Türkçe desteği
-- Metin üretimi
-- Özetleme
-- Çeviri
+```python
+# BERTurk ile Metin Sınıflandırma (2025)
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
 
-**[BERTurk](https://github.com/stefan-it/turkish-bert)** - Türkçe BERT
-- 128M parametre
-- Cased/Uncased
-- Domain-specific versiyonlar
+# BERTurk modelini yükle
+model_name = "dbmdz/bert-base-turkish-cased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(
+    model_name,
+    num_labels=2  # Pozitif/Negatif sentiment
+)
 
-### Özel Amaçlı Modeller
-**[Turkish GPT-2](https://huggingface.co/redrussianarmy/gpt2-turkish-cased)** - Metin üretimi
-- 124M parametre
-- Haber üretimi
-- Hikaye yazımı
+# Türkçe metin
+text = "Bu film gerçekten harikaydı! Kesinlikle tavsiye ederim."
 
-**[ConvBERTurk](https://huggingface.co/dbmdz/convbert-base-turkish-cased)** - Konuşma dili
-- Sohbet botları
-- Diyalog sistemleri
-- Günlük dil
+# Tokenize et
+inputs = tokenizer(
+    text,
+    return_tensors="pt",
+    padding=True,
+    truncation=True,
+    max_length=512
+)
 
-## Topluluklar
+# Tahmin yap
+with torch.no_grad():
+    outputs = model(**inputs)
+    predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
 
-### Discord/Slack Grupları
-**[Deep Learning Türkiye Discord](https://discord.gg/deeplearning)** - Aktif topluluk
-- 1000+ üye
-- Günlük tartışmalar
-- Proje paylaşımları
-- Mentörlük
+print(f"Pozitif: {predictions[0][1]:.2%}")
+print(f"Negatif: {predictions[0][0]:.2%}")
+```
 
-**[Veri Bilimi Türkiye Slack](https://veribilimi-tr.slack.com/)** - Profesyonel ağ
-- Sektör profesyonelleri
-- İş fırsatları
-- Webinar duyuruları
+---
 
-### LinkedIn Grupları
-**[Türkiye Yapay Zeka İnisiyatifi](https://www.linkedin.com/company/turkiye-yapay-zeka-inisiyatifi/)** - TRAI
-- Sektör liderleri
-- Politika tartışmaları
-- Etkinlik organizasyonları
+## 👥 Türk AI Topluluğu
 
-**[Data Science Turkey](https://www.linkedin.com/groups/13524198/)** - Veri bilimi topluluğu
-- 10K+ üye
-- Makale paylaşımları
-- Network etkinlikleri
+### Discord & Slack Grupları
 
-### Meetup Grupları
-**[Istanbul AI](https://www.meetup.com/Istanbul-AI/)** - Yüz yüze etkinlikler
-- Aylık buluşmalar
-- Workshop'lar
-- Hackathon'lar
+| Topluluk | Üye Sayısı | Odak | Link/Açıklama |
+|----------|------------|------|---------------|
+| **Deep Learning Türkiye Discord** | 1000+ | Derin öğrenme, araştırma | Aktif tartışmalar |
+| **Veri Bilimi Türkiye Slack** | 500+ | Profesyonel network | İş fırsatları |
+| **AI Türkiye Discord** | 800+ | Genel AI, ChatGPT | Güncel haberler |
+| **Türkiye Yapay Zeka İnisiyatifi** | LinkedIn | Sektör liderleri | Politika, etkinlikler |
 
-**[Ankara AI](https://www.meetup.com/Ankara-AI/)** - Başkent topluluğu
-- Akademik odaklı
-- Araştırma sunumları
-- Network etkinlikleri
+### 🌍 Meetup & Etkinlikler (2025)
 
-## Üniversite Kaynakları
+```mermaid
+mindmap
+  root((Türkiye'de<br/>AI Etkinlikleri))
+    Konferanslar
+      DataFest Türkiye
+      AI Summit Istanbul
+      PyCon Turkey
+    Meetuplar
+      Istanbul AI Meetup
+      Ankara AI Community
+      İzmir AI Group
+    Online
+      Webinarlar Haftalık
+      Canlı coding sessions
+      Paper reading groups
+```
+
+---
+
+## 💼 Türkiye'deki AI Şirketleri & Kariyer
+
+### 🏢 AI Kullanan Şirketler (2025)
+
+<details open>
+<summary><b>🔥 Türkiye'de AI/ML Pozisyonları Olan Şirketler</b></summary>
+
+#### Teknoloji Şirketleri
+
+```python
+turkish_ai_companies = {
+    "büyük_şirketler": [
+        {
+            "name": "Arçelik",
+            "ai_team": "Arçelik AI Lab",
+            "focus": "IoT, Computer Vision",
+            "hiring": "Aktif"
+        },
+        {
+            "name": "Turkcell",
+            "ai_team": "Turkcell AI Team",
+            "focus": "Telecom AI, NLP",
+            "hiring": "Aktif"
+        },
+        {
+            "name": "Aselsan",
+            "ai_team": "Aselsan AI Lab",
+            "focus": "Savunma AI, CV",
+            "hiring": "Düzenli"
+        }
+    ],
+
+    "startuplar": [
+        {
+            "name": "Insider",
+            "focus": "Marketing AI",
+            "global": "Uluslararası"
+        },
+        {
+            "name": "Getir",
+            "ai_team": "Getir AI",
+            "focus": "Lojistik optimizasyonu"
+        },
+        {
+            "name": "Trendyol",
+            "ai_team": "Trendyol Tech",
+            "focus": "E-commerce AI, öneri sistemleri"
+        },
+        {
+            "name": "Hepsiburada",
+            "ai_team": "Data Science Team",
+            "focus": "Arama, öneri, fraud detection"
+        }
+    ],
+
+    "bankacilik": [
+        "Garanti BBVA AI",
+        "İş Bankası AI",
+        "Akbank AI Lab",
+        "Yapı Kredi AI"
+    ]
+}
+```
+
+#### Maaş Aralıkları (2025 TL - Ortalama)
+
+| Pozisyon | Junior | Mid-Level | Senior |
+|----------|--------|-----------|--------|
+| **ML Engineer** | 40-60K | 80-120K | 150-250K+ |
+| **Data Scientist** | 45-65K | 90-130K | 160-280K+ |
+| **AI Researcher** | 50-70K | 100-150K | 180-300K+ |
+
+</details>
+
+### 🎯 Kariyer Yol Haritası
+
+```mermaid
+graph TD
+    A[🎓 Başlangıç] --> B{Eğitim?}
+
+    B --> C[Üniversite<br/>4 yıl]
+    B --> D[Bootcamp<br/>6-12 ay]
+    B --> E[Kendi Kendine<br/>12-18 ay]
+
+    C --> F[Staj]
+    D --> F
+    E --> F
+
+    F --> G[Junior ML Engineer]
+    G --> H[Mid-Level<br/>2-3 yıl]
+    H --> I[Senior<br/>3-5 yıl]
+    I --> J{Yön?}
+
+    J --> K[Lead/Manager]
+    J --> L[Architect]
+    J --> M[Research Scientist]
+
+    style A fill:#9b59b6,stroke:#8e44ad,stroke-width:3px,color:#fff
+    style G fill:#27ae60,stroke:#229954,stroke-width:2px,color:#fff
+    style J fill:#e67e22,stroke:#d35400,stroke-width:2px,color:#fff
+```
+
+---
+
+## 🎓 Üniversite Kaynakları
 
 ### Açık Ders Materyalleri
-**[Boğaziçi Üniversitesi](https://cmpe.boun.edu.tr/)** - CMPE bölümü
-- CmpE 544 - Pattern Recognition
-- CmpE 58Z - Deep Learning
-- Ders notları açık
 
-**[ODTÜ](https://ceng.metu.edu.tr/)** - Bilgisayar Mühendisliği
-- CENG 463 - Introduction to ML
-- CENG 783 - Deep Learning
-- Video kayıtları
+| Üniversite | Bölüm | Dersler | Erişim |
+|------------|-------|---------|--------|
+| **Boğaziçi** | Bilgisayar Müh. | CmpE 544 Pattern Recognition, 58Z Deep Learning | Ders notları açık |
+| **ODTÜ** | Bilgisayar Müh. | CENG 463 Intro to ML, 783 Deep Learning | Video kayıtları |
+| **İTÜ** | Bilgisayar Müh. | BLG 561E Deep Learning | Proje örnekleri |
+| **Koç** | AI Lab | Araştırma makaleleri | Açık yayınlar |
 
-**[İTÜ](https://bilgisayar.itu.edu.tr/)** - Bilgisayar Mühendisliği
-- BLG 561E - Deep Learning
-- Proje örnekleri
-- Ödev çözümleri
+### 🔬 Araştırma Laboratuvarları
 
-### Araştırma Laboratuvarları
-**[KUIS AI Lab](https://ai.ku.edu.tr/)** - Koç Üniversitesi
-- Bilgisayarlı görü
-- NLP araştırmaları
-- Açık pozisyonlar
+```python
+research_labs = {
+    "KUIS AI Lab": {
+        "üniversite": "Koç Üniversitesi",
+        "focus": ["Computer Vision", "NLP", "Robotics"],
+        "website": "ai.ku.edu.tr"
+    },
 
-**[METU Image Lab](https://image.ceng.metu.edu.tr/)** - ODTÜ
-- Görüntü işleme
-- Video analizi
-- Endüstriyel projeler
+    "METU Image Lab": {
+        "üniversite": "ODTÜ",
+        "focus": ["Image Processing", "Video Analysis"],
+        "projects": "Endüstriyel işbirlikleri"
+    },
 
-**[ITU AI/ML Lab](https://ailab.itu.edu.tr/)** - İTÜ
-- Çoklu disiplin
-- Sanayi işbirlikleri
-- Staj olanakları
+    "ITU AI/ML Lab": {
+        "üniversite": "İTÜ",
+        "focus": "Multidisciplinary AI",
+        "opportunities": "Staj imkanları"
+    }
+}
+```
 
-## Kariyer Kaynakları
+---
 
-### İş Bulma Platformları
-**[Kariyer.net AI İlanları](https://www.kariyer.net/)** - Türkiye'nin en büyük iş portalı
-- AI/ML pozisyonları
-- Staj ilanları
-- Remote fırsatlar
+## 📱 Açık Kaynak Türkçe NLP Projeleri
 
-**[LinkedIn Türkiye](https://www.linkedin.com/jobs/)** - Profesyonel ağ
-- Uluslararası fırsatlar
-- Startup pozisyonları
-- Network imkanı
+### GitHub Projeleri
 
-### Türkiye'deki AI Şirketleri
-- Arçelik AI
-- Aselsan AI Lab
-- Garanti BBVA AI
-- Getir AI Team
-- Hepsiburada Data Science
-- Insider AI
-- Peak Games ML
-- Trendyol Tech
-- Turkcell AI
-- Vodafone AI
+<table>
+<tr>
+<th>Proje</th>
+<th>Açıklama</th>
+<th>Yıldız</th>
+<th>Durum</th>
+</tr>
+<tr>
+<td><b>turkish-bert</b></td>
+<td>Türkçe BERT modeli</td>
+<td>⭐ 500+</td>
+<td>✅ Aktif</td>
+</tr>
+<tr>
+<td><b>zemberek-nlp</b></td>
+<td>Türkçe NLP kütüphanesi (Java)</td>
+<td>⭐ 1K+</td>
+<td>✅ Bakımda</td>
+</tr>
+<tr>
+<td><b>turkish-nlp-preprocessing</b></td>
+<td>Preprocessing araçları</td>
+<td>⭐ 200+</td>
+<td>→ Stabil</td>
+</tr>
+<tr>
+<td><b>TTC-4900</b></td>
+<td>Türkçe metin sınıflandırma dataset</td>
+<td>⭐ 100+</td>
+<td>→ Dataset</td>
+</tr>
+</table>
 
-## Etkinlikler ve Konferanslar
+### Türkçe Veri Setleri
 
-### Yıllık Konferanslar
-**[DataFest Türkiye](https://datafest.org.tr/)** - En büyük veri festivali
-- Uluslararası konuşmacılar
-- Workshop'lar
-- Networking
+```python
+turkish_datasets = {
+    "metin_siniflandirma": [
+        "TTC-4900: 7 kategori, 4900 doküman",
+        "Turkish Movie Reviews: 50K+ yorum",
+        "Turkish News: Haber kategorileri"
+    ],
 
-**[AI Summit Istanbul](https://theaisummit.com/istanbul/)** - Küresel AI zirvesi
-- Sektör liderleri
-- Panel tartışmaları
-- Demo alanı
+    "ner": [
+        "TWNERTC: Twitter NER dataset",
+        "Turkish NER: Genel amaçlı"
+    ],
 
-**[PyCon Turkey](https://tr.pycon.org/)** - Python konferansı
-- ML/AI track'i
-- Hands-on workshop'lar
-- Topluluk buluşması
+    "sentiment": [
+        "Turkish Sentiment Analysis: 15K tweet",
+        "Product Reviews TR: E-ticaret yorumları"
+    ],
+
+    "qa": [
+        "Turkish Question Answering: SQuAD-style",
+        "Turkish Reading Comprehension"
+    ]
+}
+```
+
+---
+
+## 🚀 2025 Türkiye AI Trendleri
+
+### 🔥 Güncel Konular
+
+```mermaid
+mindmap
+  root((2025<br/>AI Trends<br/>Türkiye))
+    LLM Uygulamaları
+      ChatGPT Türkçe
+      Kurumsal chatbotlar
+      RAG sistemleri
+    Yerli Modeller
+      Türkçe fine-tuning
+      Domain-specific LLMs
+      Multimodal Türkçe
+    Endüstriyel AI
+      Fintech AI
+      E-ticaret AI
+      Sağlık AI
+    Eğitim
+      AI bootcamplar
+      Üniversite programları
+      Kurumsal eğitimler
+```
+
+---
+
+## 💡 Öğrenme Tavsiyeler
+
+### 30 Günlük Hızlı Başlangıç
+
+<details>
+<summary><b>📅 Detaylı Plan (Tıkla)</b></summary>
+
+**Hafta 1-2: Temeller**
+- 🐍 Python öğren (BTK Akademi)
+- 📊 Matematik temelleri (Khan Academy Türkçe)
+- 🎥 Makine Öğrenmesi YouTube (Dr. Şeker)
+
+**Hafta 3-4: ML Basics**
+- 📚 İlk ML algoritmaları (Scikit-learn)
+- 💻 İlk proje: Titanic dataset
+- 📖 "Python ile Makine Öğrenmesi" kitabı
+
+**Hafta 5-6: Deep Learning**
+- 🧠 Neural Network temelleri
+- 🎥 Deep Learning Türkiye YouTube
+- 💻 PyTorch/TensorFlow başlangıç
+
+**Hafta 7-8: Türkçe NLP**
+- 🇹🇷 BERTurk kullanımı
+- 💻 Türkçe sentiment analysis projesi
+- 📊 Türkçe veri setleri
+
+**Hafta 9+: Uzmanlık**
+- 🎯 Alan seç (CV, NLP, vb.)
+- 💼 Portfolio oluştur
+- 👥 Topluluğa katıl (Discord)
+
+</details>
+
+---
+
+<div align="center">
+
+## 📬 Toplulukla Bağlantıda Kal
+
+<table>
+<tr>
+<td align="center">
+
+**💬 Discord**
+
+[Deep Learning TR](https://discord.gg/deeplearning)
+
+</td>
+<td align="center">
+
+**💼 LinkedIn**
+
+[TRAI - Türkiye Yapay Zeka](https://linkedin.com/company/turkiye-yapay-zeka-inisiyatifi/)
+
+</td>
+<td align="center">
+
+**🐦 Twitter**
+
+#TürkçeAI #YapayZekaTR
+
+</td>
+</tr>
+</table>
+
+---
+
+### 🌟 Başarı İpuçları
+
+> *"Türkçe kaynaklarla başla, İngilizce ile devam et, proje yaparak öğren!"*
+
+| İpucu | Açıklama |
+|-------|----------|
+| **Günlük pratik** | Her gün en az 1 saat kod yaz |
+| **Topluluk** | Discord/Slack'te aktif ol |
+| **Projeler** | Portfolyo oluştur (GitHub) |
+| **Networking** | Meetuplara katıl |
+
+---
+
+**Son Güncelleme:** Ocak 2025 | **Durum:** ![Aktif](https://img.shields.io/badge/Durum-Aktif-success?style=flat-square)
+
+</div>
+
+---
+
+*"Türkçe kaynaklarla AI öğrenmek artık çok daha kolay. Başarılar!" * 🇹🇷🚀
