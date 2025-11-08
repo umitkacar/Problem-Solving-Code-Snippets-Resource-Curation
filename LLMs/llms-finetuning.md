@@ -858,7 +858,7 @@ from trl import SFTTrainer
 from datasets import load_dataset
 import wandb
 
-class QLo RAFineTuner:
+class QLoRAFineTuner:
     def __init__(
         self,
         model_name: str = "meta-llama/Llama-4-8B",

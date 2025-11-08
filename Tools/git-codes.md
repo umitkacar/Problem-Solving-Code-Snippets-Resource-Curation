@@ -436,7 +436,6 @@ jobs:
 ### Turborepo Setup (2024 Recommended)
 
 ```json
-// turbo.json
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],

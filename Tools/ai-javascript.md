@@ -26,14 +26,18 @@ Comprehensive guide for implementing AI and machine learning in JavaScript, cove
 ## 🚀 TensorFlow.js
 
 ### Getting Started
-```javascript
-// Browser
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
 
-// Node.js
+**Browser Installation:**
+```html
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+```
+
+**Node.js Installation:**
+```bash
+# Node.js
 npm install @tensorflow/tfjs-node
 
-// With GPU support
+# With GPU support
 npm install @tensorflow/tfjs-node-gpu
 ```
 

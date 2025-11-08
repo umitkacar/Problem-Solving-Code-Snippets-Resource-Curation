@@ -473,8 +473,9 @@ prompt = "Extract as JSON: {text}"
 response = model.generate(prompt)
 try:
     data = json.loads(response)  # Might fail!
-except:
-    # Handle malformed JSON...
+except json.JSONDecodeError as e:
+    print(f"JSON parsing failed: {e}")
+    data = {}
 ```
 
 ### 4️⃣ Prompt Caching (2025 Game Changer)
